@@ -4,8 +4,6 @@
     --logout-color: #A40F0F;
 }
 
-html, body { height: 100%; }
-
 * {
     box-sizing: border-box;
     margin: 0;
@@ -23,6 +21,21 @@ h2 {
 
 label {
     font-size: 1rem;
+}
+
+main {
+    width: 80%;
+    margin: 5rem auto auto auto;
+    text-align: center;
+}
+
+.logo {
+    width: 100%;
+    max-width: 650px;
+}
+
+.p-button {
+    width: 155px;
 }
 
 .p-button.p-button-primary {
@@ -79,5 +92,20 @@ label {
 
     .p-card-content {
         padding: 0;
+    }
+}
+
+@media (max-width: 1250px) {
+    main {
+        margin: auto;
+
+        .logo {
+            max-width: 350px;
+        }
+
+        .flex {
+            flex-direction: column;
+            row-gap: 1rem;
+        }
     }
 }
