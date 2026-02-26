@@ -1,5 +1,22 @@
 <div class="center">
   <img src="/assets/logo_p6.png" alt="logo" />
   <h1>Welcome to MDD</h1>
-  <button mat-raised-button color="primary" (click)="start()">Commencer</button>
+  <div class="p-flex">
+    <p-button label="Commencer" styleClass="p-button-primary" (click)="start()"></p-button>
+    <p-button label="Secondary" styleClass="p-button-secondary"></p-button>
+  </div>
+
+  <h2>Connexion</h2>
+
+  <p-card header="Bienvenue sur MDD">
+    <ng-template pTemplate="subtitle">
+      <div>Auteur : Jean Dupont</div>
+      <div>Date : 26 février 2026</div>
+    </ng-template>
+
+    <p>Contenu de la carte...</p>
+  </p-card>
+
+  <label for="over_label">Over Label</label>
+  <input pInputText id="over_label" />
 </div>
