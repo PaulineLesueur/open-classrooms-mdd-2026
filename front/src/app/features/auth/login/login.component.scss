@@ -11,3 +11,28 @@ section {
         justify-content: center;
     }
 }
+
+.mobile-logo {
+    display: none;
+}
+
+@media (max-width: 740px) {
+    app-navbar {
+        display: none;
+    }
+
+    main .flex {
+        row-gap: 0;
+    }
+
+    .back-arrow {
+        position: fixed;
+        top: 1rem;
+        left: 1rem;
+    }
+
+    .mobile-logo {
+        display: block;width: 225px;
+        margin: 5rem auto 0 auto;
+    }
+}
