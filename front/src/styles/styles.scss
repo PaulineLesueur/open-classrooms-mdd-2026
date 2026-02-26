@@ -84,6 +84,11 @@ main {
     }
 }
 
+.p-disabled, .p-component:disabled {
+    background-color: black !important;
+    opacity: 0.4;
+}
+
 .p-card {
     box-shadow: none;
     background: #F5F5F5;

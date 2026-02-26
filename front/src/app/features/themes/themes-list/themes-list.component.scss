@@ -1,0 +1,30 @@
+main {
+    margin: 2rem auto auto auto;
+}
+
+:host ::ng-deep  {
+    p-card {
+        display: block;
+        width: 31%;
+    }
+
+    .p-button {
+        width: 160px;
+    }
+}
+
+@media (max-width: 1350px) {
+    :host ::ng-deep  {
+        p-card {
+            width: 48%;
+        }
+    }
+}
+
+@media (max-width: 1000px) {
+    :host ::ng-deep  {
+        p-card {
+            width: 100%;
+        }
+    }
+}
