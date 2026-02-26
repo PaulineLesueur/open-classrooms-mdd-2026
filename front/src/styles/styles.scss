@@ -101,11 +101,20 @@ main {
 
         .logo {
             max-width: 350px;
+            margin-bottom: 3rem;
         }
 
         .flex {
             flex-direction: column;
-            row-gap: 1rem;
+            row-gap: 2rem;
+        }
+    }
+}
+
+@media (max-width: 360px) {
+    main {
+        .logo {
+            margin-top: 3rem;
         }
     }
 }
