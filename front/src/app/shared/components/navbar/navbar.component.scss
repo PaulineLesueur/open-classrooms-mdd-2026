@@ -1,0 +1,31 @@
+.logo {
+    width: 140px;
+}
+
+:host ::ng-deep {
+    .p-menubar {
+        padding: 0 2rem;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        border-bottom: 1px solid black;
+        border-radius: 0;
+
+        &-end {
+            display: flex;
+            gap: 2.5rem;
+        }
+    }
+
+    .p-element {
+        font-size: 1.3rem;
+    }
+
+    .nav-link--logout {
+        padding-right: 0.5rem;
+        font-size: 1rem;
+        font-weight: bold;
+        color: var(--logout-color);
+    }
+}
+
