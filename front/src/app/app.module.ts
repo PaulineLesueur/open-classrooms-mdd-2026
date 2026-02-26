@@ -13,9 +13,10 @@ import { RippleModule } from 'primeng/ripple';
 import { AvatarModule } from 'primeng/avatar';
 import { RegisterComponent } from './features/auth/register/register.component';
 import { LoginComponent } from './features/auth/login/login.component';
+import { FeedComponent } from './features/articles/feed/feed.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, NavbarComponent, RegisterComponent, LoginComponent],
+  declarations: [AppComponent, HomeComponent, NavbarComponent, RegisterComponent, LoginComponent, FeedComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

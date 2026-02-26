@@ -17,7 +17,8 @@ export class NavbarComponent implements OnInit {
       },
       {
         label: 'Articles',
-        icon: 'pi pi-file'
+        icon: 'pi pi-file',
+        routerLink: '/feed'
       },
       {
         label: 'Thèmes',

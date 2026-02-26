@@ -46,6 +46,7 @@ main {
 .p-button {
     width: 155px;
     height: 40px;
+    border-radius: 8px;
 }
 
 .p-button.p-button-primary {
@@ -92,11 +93,13 @@ main {
 
     .p-card-subtitle {
         display: flex;
-        gap: 0.75rem;
+        gap: 2.5rem;
+        margin-bottom: 0.9rem;
         color: black;
     }
 
     .p-card-title {
+        margin-bottom: 0.9rem;
         font-size: 1rem;
     }
 
