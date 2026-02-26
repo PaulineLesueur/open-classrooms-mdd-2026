@@ -17,6 +17,16 @@ body {
 h2 {
     font-size: 1.5rem;
     font-weight: 400;    
+    text-align: center;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+
+    &:hover {
+        color: black;
+    }
 }
 
 label {
@@ -26,7 +36,6 @@ label {
 main {
     width: 80%;
     margin: 5rem auto auto auto;
-    text-align: center;
 }
 
 .logo {
@@ -94,6 +103,10 @@ main {
     .p-card-content {
         padding: 0;
     }
+}
+
+.p-inputtext {
+    border-color: black;
 }
 
 @media (max-width: 1250px) {

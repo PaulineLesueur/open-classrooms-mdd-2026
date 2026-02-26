@@ -11,9 +11,10 @@ import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { MenubarModule } from 'primeng/menubar';
 import { RippleModule } from 'primeng/ripple';
 import { AvatarModule } from 'primeng/avatar';
+import { RegisterComponent } from './features/auth/register/register.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, NavbarComponent],
+  declarations: [AppComponent, HomeComponent, NavbarComponent, RegisterComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
