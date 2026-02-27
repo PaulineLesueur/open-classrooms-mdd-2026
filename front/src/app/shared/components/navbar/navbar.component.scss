@@ -25,6 +25,17 @@
         color: var(--primary-color);
     }
 
+    .avatar--active {
+        .p-avatar {
+            border: 3px solid var(--primary-color);
+
+            .p-avatar-icon {
+                font-weight: 600;
+                color: var(--primary-color);
+            }
+        }
+    }
+
     .nav-link--logout {
         padding-right: 0.5rem;
         font-size: 1rem;

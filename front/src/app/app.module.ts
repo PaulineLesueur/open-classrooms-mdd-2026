@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,9 +20,11 @@ import { ArticleDetailComponent } from './features/articles/article-detail/artic
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { CreateFormComponent } from './features/articles/create-form/create-form.component';
 import { DropdownModule } from 'primeng/dropdown';
+import { ProfileComponent } from './features/profile/profile/profile.component';
+import { PasswordModule } from 'primeng/password';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, NavbarComponent, RegisterComponent, LoginComponent, FeedComponent, ThemesListComponent, ArticleDetailComponent, CreateFormComponent],
+  declarations: [AppComponent, HomeComponent, NavbarComponent, RegisterComponent, LoginComponent, FeedComponent, ThemesListComponent, ArticleDetailComponent, CreateFormComponent, ProfileComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -33,7 +36,9 @@ import { DropdownModule } from 'primeng/dropdown';
     RippleModule,
     AvatarModule,
     InputTextareaModule,
-    DropdownModule
+    DropdownModule,
+    PasswordModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

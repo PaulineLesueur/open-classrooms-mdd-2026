@@ -18,6 +18,10 @@ h2 {
     font-size: 1.5rem;
     font-weight: 400;    
     text-align: center;
+
+    &.bold {
+        font-weight: 700;
+    }
 }
 
 a {
@@ -141,6 +145,10 @@ textarea {
         .flex {
             flex-direction: column;
             row-gap: 2rem;
+
+            &.container-button {
+                text-align: center;
+            }
         }
     }
 }

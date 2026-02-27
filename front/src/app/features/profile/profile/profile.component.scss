@@ -1,0 +1,45 @@
+#profile {
+    width: 90%;
+    margin: 0 auto 1.5rem auto;
+    border-bottom: 1px solid black;
+
+    .form {
+        max-width: 240px;
+        margin: auto;
+    }
+}
+
+:host ::ng-deep  {
+    .p-inputtext {
+        border: 2px solid var(--primary-color);
+    }
+
+    .p-input-icon-right > i:last-of-type {
+        cursor: pointer;
+    }
+
+    p-card {
+        display: block;
+        width: 31%;
+    }
+}
+
+@media (max-width: 1715px) {
+    :host ::ng-deep  {
+        p-card {
+            width: 47%;
+        }
+    }
+}
+
+@media (max-width: 1015px) {
+    #profile {
+        width: 100%;
+    }
+
+    :host ::ng-deep  {
+        p-card {
+            width: 100%;
+        }
+    }
+}

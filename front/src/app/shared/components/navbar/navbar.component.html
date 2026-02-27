@@ -6,6 +6,8 @@
         <div class="flex gap-3 align-items-center">
             <a *ngFor="let item of items" pRipple class="cursor-pointer" [ngClass]="item.styleClass" [routerLink]="item.routerLink" routerLinkActive="nav-link--active" [routerLinkActiveOptions]="{exact: true}">{{ item.label }}</a>
         </div>
-        <p-avatar icon="pi pi-user" class="mr-2" size="large" shape="circle"></p-avatar>
+        <a routerLink="/profile" routerLinkActive="avatar--active">
+            <p-avatar icon="pi pi-user" class="mr-2" size="large" shape="circle"></p-avatar>
+        </a>
     </ng-template>
 </p-menubar>
