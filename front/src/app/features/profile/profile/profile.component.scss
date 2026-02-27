@@ -14,6 +14,14 @@
         border: 2px solid var(--primary-color);
     }
 
+    .p-password {
+        width: 100%;
+
+        .p-password-input {
+            width: 100%;
+        }
+    }
+
     .p-input-icon-right > i:last-of-type {
         cursor: pointer;
     }
