@@ -17,9 +17,11 @@ import { FeedComponent } from './features/articles/feed/feed.component';
 import { ThemesListComponent } from './features/themes/themes-list/themes-list.component';
 import { ArticleDetailComponent } from './features/articles/article-detail/article-detail.component';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { CreateFormComponent } from './features/articles/create-form/create-form.component';
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, NavbarComponent, RegisterComponent, LoginComponent, FeedComponent, ThemesListComponent, ArticleDetailComponent],
+  declarations: [AppComponent, HomeComponent, NavbarComponent, RegisterComponent, LoginComponent, FeedComponent, ThemesListComponent, ArticleDetailComponent, CreateFormComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -31,6 +33,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
     RippleModule,
     AvatarModule,
     InputTextareaModule,
+    DropdownModule
   ],
   providers: [],
   bootstrap: [AppComponent],

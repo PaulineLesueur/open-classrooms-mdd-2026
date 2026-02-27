@@ -1,0 +1,19 @@
+h2 {
+    font-weight: 500;
+}
+
+section {
+    width: 100%;
+    max-width: 280px;
+    margin: auto;
+}
+
+:host ::ng-deep  {
+    .p-dropdown, .p-inputtext {
+        border: 2px solid var(--primary-color);
+
+       span {
+            border: none;
+       }
+    }
+}

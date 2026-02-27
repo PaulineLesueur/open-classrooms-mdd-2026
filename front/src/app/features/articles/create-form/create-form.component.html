@@ -1,0 +1,15 @@
+<app-navbar></app-navbar>
+<main>
+    <a class="back-arrow" routerLink="/"><i class="pi pi-arrow-left"></i></a>
+    <section>
+        <h2 class="mb-5">Créer un nouvel article</h2>
+        <div class="flex flex-column row-gap-3">
+            <p-dropdown placeholder="Sélectionner un thème"></p-dropdown>
+            <input type="text" pInputText placeholder="Titre de l'article" />
+            <textarea  rows="6" pInputTextarea placeholder="Contenu de l'article"></textarea>
+            <div class="mt-4 flex justify-content-center">
+                <p-button styleClass="p-button-primary" label="Créer"></p-button>
+            </div>
+        </div>
+    </section>
+</main>
