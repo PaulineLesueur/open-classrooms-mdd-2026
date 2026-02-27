@@ -48,13 +48,18 @@ p-card {
         text-align: right;
     }
 
-    main .flex {
-        row-gap: 0.5rem !important;
-        margin-bottom: 1rem !important;
+    main {
+        flex-direction: column;
+        row-gap: 1rem;
+
+        .flex {
+            row-gap: 0.5rem !important;
+            margin-bottom: 1rem !important;
 
         &.add-comment {
             flex-direction: row;
             column-gap: 0.5rem !important;
         }
+    }
     }
 }
