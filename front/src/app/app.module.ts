@@ -22,6 +22,7 @@ import { CreateFormComponent } from './features/articles/create-form/create-form
 import { DropdownModule } from 'primeng/dropdown';
 import { ProfileComponent } from './features/profile/profile/profile.component';
 import { PasswordModule } from 'primeng/password';
+import { SidebarModule } from 'primeng/sidebar';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, NavbarComponent, RegisterComponent, LoginComponent, FeedComponent, ThemesListComponent, ArticleDetailComponent, CreateFormComponent, ProfileComponent],
@@ -38,6 +39,7 @@ import { PasswordModule } from 'primeng/password';
     InputTextareaModule,
     DropdownModule,
     PasswordModule,
+    SidebarModule,
     FormsModule
   ],
   providers: [],

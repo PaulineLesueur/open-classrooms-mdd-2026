@@ -8,6 +8,7 @@ import { MenuItem } from 'primeng/api';
 })
 export class NavbarComponent implements OnInit {
   items: MenuItem[] = [];
+  menuOpen = false;
 
   ngOnInit() {
     this.items = [
