@@ -16,6 +16,7 @@ import { LoginComponent } from './features/auth/login/login.component';
 import { FeedComponent } from './features/articles/feed/feed.component';
 import { ThemesListComponent } from './features/themes/themes-list/themes-list.component';
 import { ArticleDetailComponent } from './features/articles/article-detail/article-detail.component';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, NavbarComponent, RegisterComponent, LoginComponent, FeedComponent, ThemesListComponent, ArticleDetailComponent],
@@ -28,7 +29,8 @@ import { ArticleDetailComponent } from './features/articles/article-detail/artic
     MenubarModule,
     InputTextModule,
     RippleModule,
-    AvatarModule
+    AvatarModule,
+    InputTextareaModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
