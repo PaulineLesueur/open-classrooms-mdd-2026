@@ -1,4 +1,121 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+    --primary-color: #7550ec;
+    --hover-color: #7763C5;
+    --logout-color: #b62b2b;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body { 
+    font-family: 'Inter'; 
+}
+
+h2 {
+    font-size: 1.5rem;
+    font-weight: 400;    
+}
+
+label {
+    font-size: 1rem;
+}
+
+main {
+    width: 80%;
+    margin: 5rem auto auto auto;
+    text-align: center;
+}
+
+.logo {
+    width: 100%;
+    max-width: 650px;
+}
+
+.p-button {
+    width: 155px;
+    height: 40px;
+}
+
+.p-button.p-button-primary {
+    background-color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+
+    &:enabled:hover {
+        background-color: var(--hover-color);
+        border: 1px solid var(--hover-color);
+    }
+
+    &:enabled:active {
+        background-color: var(--hover-color);
+        border: 1px solid var(--hover-color);
+    }
+}
+
+.p-button.p-button-secondary,
+.p-buttonset.p-button-secondary > .p-button,
+.p-splitbutton.p-button-secondary > .p-button {
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+
+    &:enabled:hover {
+        background-color: #f0f0f0;
+        border-color: black;
+        color: black;
+    }
+
+    &:enabled:active {
+        background-color: #e0e0e0;
+        border-color: black;
+        color: black;
+    }
+}
+
+.p-card {
+    box-shadow: none;
+    background: #F5F5F5;
+    border-radius: 16px;
+    font-size: 0.875rem;
+    color: black;
+
+    .p-card-subtitle {
+        display: flex;
+        gap: 0.75rem;
+        color: black;
+    }
+
+    .p-card-title {
+        font-size: 1rem;
+    }
+
+    .p-card-content {
+        padding: 0;
+    }
+}
+
+@media (max-width: 1250px) {
+    main {
+        margin: auto;
+
+        .logo {
+            max-width: 350px;
+            margin-bottom: 3rem;
+        }
+
+        .flex {
+            flex-direction: column;
+            row-gap: 2rem;
+        }
+    }
+}
+
+@media (max-width: 360px) {
+    main {
+        .logo {
+            margin-top: 3rem;
+        }
+    }
+}

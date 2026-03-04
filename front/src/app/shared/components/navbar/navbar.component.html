@@ -1,0 +1,11 @@
+<p-menubar>
+    <ng-template pTemplate="start">
+        <img src="assets/logo_p6.png" alt="Logo MDD" class="logo" />
+    </ng-template>
+    <ng-template pTemplate="end" class="flex">
+        <div class="flex gap-3 align-items-center">
+            <a *ngFor="let item of items" pRipple class="cursor-pointer" [ngClass]="item.styleClass">{{ item.label }}</a>
+        </div>
+        <p-avatar icon="pi pi-user" class="mr-2" size="large" shape="circle"></p-avatar>
+    </ng-template>
+</p-menubar>
