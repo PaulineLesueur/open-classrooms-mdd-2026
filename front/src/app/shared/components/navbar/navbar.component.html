@@ -3,9 +3,27 @@
         <img src="assets/logo_p6.png" alt="Logo MDD" class="logo" />
     </ng-template>
     <ng-template pTemplate="end" class="flex">
-        <div class="flex gap-3 align-items-center">
-            <a *ngFor="let item of items" pRipple class="cursor-pointer" [ngClass]="item.styleClass">{{ item.label }}</a>
+        <div class="nav-desktop flex gap-3 align-items-center">
+            <a *ngFor="let item of items" pRipple class="cursor-pointer" [ngClass]="item.styleClass" [routerLink]="item.routerLink" routerLinkActive="nav-link--active" [routerLinkActiveOptions]="{exact: true}">{{ item.label }}</a>
         </div>
-        <p-avatar icon="pi pi-user" class="mr-2" size="large" shape="circle"></p-avatar>
+        <a routerLink="/profile" routerLinkActive="avatar--active" class="nav-desktop">
+            <p-avatar icon="pi pi-user" class="mr-2" size="large" shape="circle"></p-avatar>
+        </a>
+        <button class="nav-burger" (click)="menuOpen = true">
+            <i class="pi pi-bars"></i>
+        </button>
     </ng-template>
 </p-menubar>
+
+<p-sidebar [(visible)]="menuOpen" position="right" [style]="{'width': '60%'}">
+    <div class="sidebar-content">
+        <div class="sidebar-top">
+            <a *ngFor="let item of items" pRipple class="cursor-pointer" [ngClass]="item.styleClass" [routerLink]="item.routerLink" routerLinkActive="nav-link--active" [routerLinkActiveOptions]="{exact: true}" (click)="menuOpen = false">{{ item.label }}</a>
+        </div>
+        <div class="sidebar-bottom">
+            <a routerLink="/profile" routerLinkActive="avatar--active" (click)="menuOpen = false">
+                <p-avatar icon="pi pi-user" size="large" shape="circle"></p-avatar>
+            </a>
+        </div>
+    </div>
+</p-sidebar>
