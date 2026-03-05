@@ -1,6 +1,5 @@
 package com.openclassrooms.mddapi.mappers;
 
-import com.openclassrooms.mddapi.dto.requests.ThemeRequest;
 import com.openclassrooms.mddapi.dto.responses.ThemeResponse;
 import com.openclassrooms.mddapi.entities.Theme;
 import org.springframework.stereotype.Component;
@@ -13,12 +12,5 @@ public class ThemeMapper {
         response.setName(theme.getName());
         response.setDescription(theme.getDescription());
         return response;
-    }
-
-    public Theme toEntity(ThemeRequest request) {
-        Theme theme = new Theme();
-        theme.setName(request.getName());
-        theme.setDescription(request.getDescription());
-        return theme;
     }
 }
