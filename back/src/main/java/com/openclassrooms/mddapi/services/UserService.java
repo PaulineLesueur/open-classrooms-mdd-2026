@@ -16,13 +16,13 @@ public class UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
 
-    public UserResponse getById(UUID id) {
+    public UserResponse getById(String id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("No user found with the id : " + id));
         return userMapper.toResponse(user);
     }
 
-    public UserResponse update(UUID id, UserRequest request) {
+    public UserResponse update(String id, UserRequest request) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("No user found with the id : " + id));
         if(!user.getUsername().equals(request.getUsername()) && userRepository.existsByUsername(request.getUsername())) {

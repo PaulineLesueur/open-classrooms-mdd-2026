@@ -17,12 +17,12 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserResponse> getById(@PathVariable UUID id) {
+    public ResponseEntity<UserResponse> getById(@PathVariable String id) {
         return ResponseEntity.ok(userService.getById(id));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserResponse> update(@PathVariable UUID id, @RequestBody @Valid UserRequest request) {
+    public ResponseEntity<UserResponse> update(@PathVariable String id, @RequestBody @Valid UserRequest request) {
         return ResponseEntity.ok(userService.update(id, request));
     }
 }
