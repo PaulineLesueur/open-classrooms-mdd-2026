@@ -1,11 +1,15 @@
 package com.openclassrooms.mddapi.entities;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.List;
 import java.util.UUID;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "users")
 public class User {
@@ -13,7 +17,7 @@ public class User {
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(columnDefinition = "VARCHAR(36)")
-    private UUID id;
+    private String id;
 
     @Column(nullable = false, unique = true, length = 50)
     private String username;
