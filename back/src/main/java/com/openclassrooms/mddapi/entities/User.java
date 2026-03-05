@@ -1,6 +1,7 @@
 package com.openclassrooms.mddapi.entities;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -17,4 +18,12 @@ public class User {
 
     @Column(nullable = false)
     private String password;
+
+    @ManyToMany
+    @JoinTable(
+        name = "subscriptions",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "theme_id")
+    )
+    private List<Theme> subscriptions;
 }

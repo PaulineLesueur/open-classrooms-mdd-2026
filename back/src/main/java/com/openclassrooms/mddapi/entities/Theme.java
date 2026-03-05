@@ -1,6 +1,7 @@
 package com.openclassrooms.mddapi.entities;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "themes")
@@ -14,4 +15,7 @@ public class Theme {
 
     @Column(nullable = false, columnDefinition = "TEXT")
     private String description;
+
+    @ManyToMany(mappedBy = "subscriptions")
+    private List<User> subscribers;
 }
