@@ -2,6 +2,7 @@ package com.openclassrooms.mddapi.entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "articles")
@@ -26,4 +27,7 @@ public class Article {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "theme_id", nullable = false)
     private Theme theme;
+
+    @OneToMany(mappedBy = "article")
+    private List<Comment> comments;
 }
