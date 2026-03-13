@@ -25,6 +25,8 @@ import { DropdownModule } from 'primeng/dropdown';
 import { ProfileComponent } from './features/profile/profile.component';
 import { PasswordModule } from 'primeng/password';
 import { SidebarModule } from 'primeng/sidebar';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, NavbarComponent, RegisterComponent, LoginComponent, FeedComponent, ThemesListComponent, ArticleDetailComponent, CreateFormComponent, ProfileComponent],
@@ -44,9 +46,12 @@ import { SidebarModule } from 'primeng/sidebar';
     SidebarModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ToastModule,
   ],
-  providers: [],
+  providers: [
+    MessageService
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

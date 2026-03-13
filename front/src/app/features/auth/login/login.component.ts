@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
@@ -14,7 +15,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private messageService: MessageService
   ) {
     this.form = this.fb.group({
       identifier: ['', Validators.required],
@@ -34,7 +36,11 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/feed']);
       },
       error: (err) => {
-        console.error('Login failed', err);
+        this.messageService.add({
+            severity: 'error',
+            summary: 'Échec de la connexion',
+            detail: 'Le nom d\'utilisateur ou le mot de passe semble incorrect'
+        });
       }
     })
   }
