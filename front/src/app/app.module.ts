@@ -20,7 +20,7 @@ import { ArticleDetailComponent } from './features/articles/article-detail/artic
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { CreateFormComponent } from './features/articles/create-form/create-form.component';
 import { DropdownModule } from 'primeng/dropdown';
-import { ProfileComponent } from './features/profile/profile/profile.component';
+import { ProfileComponent } from './features/profile/profile.component';
 import { PasswordModule } from 'primeng/password';
 import { SidebarModule } from 'primeng/sidebar';
 

@@ -7,7 +7,7 @@ import { FeedComponent } from './features/articles/feed/feed.component';
 import { ThemesListComponent } from './features/themes/themes-list/themes-list.component';
 import { ArticleDetailComponent } from './features/articles/article-detail/article-detail.component';
 import { CreateFormComponent } from './features/articles/create-form/create-form.component';
-import { ProfileComponent } from './features/profile/profile/profile.component';
+import { ProfileComponent } from './features/profile/profile.component';
 
 // consider a guard combined with canLoad / canActivate route option
 // to manage unauthenticated user to access private routes
