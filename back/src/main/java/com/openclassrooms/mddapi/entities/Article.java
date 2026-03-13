@@ -1,9 +1,14 @@
 package com.openclassrooms.mddapi.entities;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "articles")
 public class Article {
@@ -30,4 +35,9 @@ public class Article {
 
     @OneToMany(mappedBy = "article")
     private List<Comment> comments;
+
+    @PrePersist
+    public void prePersist() {
+        this.createdAt = LocalDate.now();
+    }
 }
