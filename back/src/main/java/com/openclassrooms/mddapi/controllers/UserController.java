@@ -1,5 +1,6 @@
 package com.openclassrooms.mddapi.controllers;
 
+import com.openclassrooms.mddapi.dto.requests.UserPasswordRequest;
 import com.openclassrooms.mddapi.dto.requests.UserRequest;
 import com.openclassrooms.mddapi.dto.responses.UserResponse;
 import com.openclassrooms.mddapi.services.UserService;
@@ -24,5 +25,12 @@ public class UserController {
     @PutMapping("/{id}")
     public ResponseEntity<UserResponse> update(@PathVariable String id, @RequestBody @Valid UserRequest request) {
         return ResponseEntity.ok(userService.update(id, request));
+    }
+
+    @PutMapping("/{id}/password")
+    public ResponseEntity<UserResponse> updatePassword(
+            @PathVariable String id,
+            @Valid @RequestBody UserPasswordRequest request) {
+        return ResponseEntity.ok(userService.updatePassword(id, request));
     }
 }
