@@ -2,6 +2,7 @@ package com.openclassrooms.mddapi.services;
 
 import com.openclassrooms.mddapi.dto.requests.LoginRequest;
 import com.openclassrooms.mddapi.dto.requests.RegisterRequest;
+import com.openclassrooms.mddapi.dto.requests.UserPasswordRequest;
 import com.openclassrooms.mddapi.dto.requests.UserRequest;
 import com.openclassrooms.mddapi.dto.responses.AuthResponse;
 import com.openclassrooms.mddapi.dto.responses.UserResponse;
@@ -46,6 +47,13 @@ public class UserService {
         }
         user.setUsername(request.getUsername());
         user.setEmail(request.getEmail());
+        return userMapper.toResponse(userRepository.save(user));
+    }
+
+    public UserResponse updatePassword(String id, UserPasswordRequest request) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("No user found with the id : " + id));
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
         return userMapper.toResponse(userRepository.save(user));
     }
 
