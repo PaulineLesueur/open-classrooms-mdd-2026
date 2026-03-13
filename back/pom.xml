@@ -28,7 +28,8 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<optional>true</optional>
+			<version>1.18.30</version>
+			<scope>provided</scope>
 		</dependency>
 		<!-- Connecteur MySQL géré par le BOM Spring Boot 2.7.3 -->
 		<dependency>

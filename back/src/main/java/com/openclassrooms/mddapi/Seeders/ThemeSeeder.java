@@ -4,11 +4,13 @@ import com.openclassrooms.mddapi.entities.Theme;
 import com.openclassrooms.mddapi.repositories.ThemeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
+@Order(1)
 @RequiredArgsConstructor
 public class ThemeSeeder implements CommandLineRunner {
     private final ThemeRepository themeRepository;
