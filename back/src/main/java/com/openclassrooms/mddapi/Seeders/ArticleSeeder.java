@@ -8,11 +8,13 @@ import com.openclassrooms.mddapi.repositories.ThemeRepository;
 import com.openclassrooms.mddapi.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
+@Order(3)
 @RequiredArgsConstructor
 public class ArticleSeeder implements CommandLineRunner {
 
@@ -33,7 +35,7 @@ public class ArticleSeeder implements CommandLineRunner {
                     .orElse(null);
 
             if (author == null || theme == null) {
-                System.out.println("No User nor Theme found on database. Seeding ignored.");
+                System.out.println("No User or Theme found on database. Seeding ignored.");
                 return;
             }
 
