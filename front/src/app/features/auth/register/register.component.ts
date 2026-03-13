@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { passwordValidator } from 'src/app/core/validators/password.validator';
 
 @Component({
   selector: 'app-register',
@@ -22,7 +23,7 @@ export class RegisterComponent {
         this.form = this.fb.group({
             username: ['', Validators.required],
             email: ['', [Validators.required, Validators.email]],
-            password: ['', Validators.required]
+            password: ['', [Validators.required, passwordValidator]]
         });
     }
 

@@ -17,6 +17,9 @@
             <div class="flex flex-column mt-4">
                 <label for="password">Mot de passe</label>
                 <p-password id="password" formControlName="password" [toggleMask]="true" [feedback]="false" styleClass="w-full" [inputStyle]="{'width': '100%'}"></p-password>
+                <small class="p-error" *ngIf="form.get('password')?.invalid && form.get('password')?.dirty">
+                    Le mot de passe doit contenir au minimum 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.
+                </small>
             </div>
             <p-button label="S'inscrire" styleClass="p-button-primary mt-4" type="submit"></p-button>
         </form>
