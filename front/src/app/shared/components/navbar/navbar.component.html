@@ -4,7 +4,7 @@
     </ng-template>
     <ng-template pTemplate="end" class="flex">
         <div class="nav-desktop flex gap-3 align-items-center">
-            <a *ngFor="let item of items" pRipple class="cursor-pointer" [ngClass]="item.styleClass" [routerLink]="item.routerLink" routerLinkActive="nav-link--active" [routerLinkActiveOptions]="{exact: true}">{{ item.label }}</a>
+            <a *ngFor="let item of items" pRipple class="cursor-pointer" [ngClass]="item.styleClass" [routerLink]="item.routerLink || null" routerLinkActive="nav-link--active" [routerLinkActiveOptions]="{exact: true}" (click)="item.command && item.command({})">{{ item.label }}</a>
         </div>
         <a routerLink="/profile" routerLinkActive="avatar--active" class="nav-desktop">
             <p-avatar icon="pi pi-user" class="mr-2" size="large" shape="circle"></p-avatar>
@@ -18,7 +18,7 @@
 <p-sidebar [(visible)]="menuOpen" position="right" [style]="{'width': '60%'}">
     <div class="sidebar-content">
         <div class="sidebar-top">
-            <a *ngFor="let item of items" pRipple class="cursor-pointer" [ngClass]="item.styleClass" [routerLink]="item.routerLink" routerLinkActive="nav-link--active" [routerLinkActiveOptions]="{exact: true}" (click)="menuOpen = false">{{ item.label }}</a>
+            <a *ngFor="let item of items" pRipple class="cursor-pointer" [ngClass]="item.styleClass" [routerLink]="item.routerLink || null" routerLinkActive="nav-link--active" [routerLinkActiveOptions]="{exact: true}" (click)="item.command && item.command({}); menuOpen = false">{{ item.label }}</a>
         </div>
         <div class="sidebar-bottom">
             <a routerLink="/profile" routerLinkActive="avatar--active" (click)="menuOpen = false">

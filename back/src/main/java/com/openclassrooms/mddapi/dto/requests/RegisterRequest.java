@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Getter
@@ -21,5 +22,9 @@ public class RegisterRequest {
     private String email;
 
     @NotBlank(message = "Password is mandatory")
+    @Pattern(
+            regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!*]).{8,}$",
+            message = "Password must contain at least 8 characters, one uppercase, one lowercase, one digit and one special character"
+    )
     private String password;
 }

@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,9 +22,13 @@ import { ArticleDetailComponent } from './features/articles/article-detail/artic
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { CreateFormComponent } from './features/articles/create-form/create-form.component';
 import { DropdownModule } from 'primeng/dropdown';
-import { ProfileComponent } from './features/profile/profile/profile.component';
+import { ProfileComponent } from './features/profile/profile.component';
 import { PasswordModule } from 'primeng/password';
 import { SidebarModule } from 'primeng/sidebar';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, NavbarComponent, RegisterComponent, LoginComponent, FeedComponent, ThemesListComponent, ArticleDetailComponent, CreateFormComponent, ProfileComponent],
@@ -40,9 +46,19 @@ import { SidebarModule } from 'primeng/sidebar';
     DropdownModule,
     PasswordModule,
     SidebarModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    ToastModule,
   ],
-  providers: [],
+  providers: [
+    MessageService,
+    {
+        provide: HTTP_INTERCEPTORS,
+        useClass: AuthInterceptor,
+        multi: true
+    }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

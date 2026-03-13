@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { AuthService } from '../../../core/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -7,14 +9,22 @@ import { MenuItem } from 'primeng/api';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
+  @Input() hideNav = false;
   items: MenuItem[] = [];
   menuOpen = false;
 
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
+
   ngOnInit() {
+
     this.items = [
       {
         label: 'Se déconnecter',
-        styleClass: 'nav-link--logout'
+        styleClass: 'nav-link--logout',
+        command: () => this.logout()
       },
       {
         label: 'Articles',
@@ -28,4 +38,10 @@ export class NavbarComponent implements OnInit {
       }
     ];
   }
+
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/']);
+  }
+
 }

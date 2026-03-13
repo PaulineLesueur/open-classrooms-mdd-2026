@@ -1,15 +1,65 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { passwordValidator } from 'src/app/core/validators/password.validator';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
 
-  constructor() { }
+    form: FormGroup;
 
-  ngOnInit(): void {
-  }
+    constructor(
+        private fb: FormBuilder,
+        private authService: AuthService,
+        private router: Router,
+        private messageService: MessageService
+    ) {
+        this.form = this.fb.group({
+            username: ['', Validators.required],
+            email: ['', [Validators.required, Validators.email]],
+            password: ['', [Validators.required, passwordValidator]]
+        });
+    }
 
+    onSubmit(): void {
+        if (this.form.invalid) return;
+        this.authService.register(this.form.value).subscribe({
+            next: (response) => {
+                this.authService.saveToken(response.token);
+                this.messageService.add({
+                    severity: 'success',
+                    detail: 'Compte créé avec succès !'
+                });
+                setTimeout(() => this.router.navigate(['/feed']), 1500);
+            },
+            error: (err) => {
+                const message = err.error?.message || '';
+                if (message.includes('Username')) {
+                    this.messageService.add({
+                        severity: 'error',
+                        summary: 'Ce nom d\'utilisateur est déjà lié à un compte',
+                        detail: 'Veuillez en choisir un autre'
+                    });
+                } else if (message.includes('Email')) {
+                    this.messageService.add({
+                        severity: 'error',
+                        summary: 'Cette adresse email est déjà liée à un compte',
+                        detail: 'Veuillez en choisir un autre'
+                    });
+                } else {
+                    this.messageService.add({
+                        severity: 'error',
+                        summary: 'Erreur',
+                        detail: 'Une erreur est survenue, veuillez réessayer'
+                    });
+                }
+            }
+        });
+    }
 }
