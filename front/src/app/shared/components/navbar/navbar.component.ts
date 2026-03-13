@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 
 @Component({
@@ -7,10 +7,12 @@ import { MenuItem } from 'primeng/api';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
+  @Input() hideNav = false;
   items: MenuItem[] = [];
   menuOpen = false;
 
   ngOnInit() {
+
     this.items = [
       {
         label: 'Se déconnecter',
@@ -28,4 +30,5 @@ export class NavbarComponent implements OnInit {
       }
     ];
   }
+
 }

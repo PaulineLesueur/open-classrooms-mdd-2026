@@ -3,15 +3,17 @@
         <img src="assets/logo_p6.png" alt="Logo MDD" class="logo" />
     </ng-template>
     <ng-template pTemplate="end" class="flex">
-        <div class="nav-desktop flex gap-3 align-items-center">
-            <a *ngFor="let item of items" pRipple class="cursor-pointer" [ngClass]="item.styleClass" [routerLink]="item.routerLink" routerLinkActive="nav-link--active" [routerLinkActiveOptions]="{exact: true}">{{ item.label }}</a>
-        </div>
-        <a routerLink="/profile" routerLinkActive="avatar--active" class="nav-desktop">
-            <p-avatar icon="pi pi-user" class="mr-2" size="large" shape="circle"></p-avatar>
-        </a>
-        <button class="nav-burger" (click)="menuOpen = true">
-            <i class="pi pi-bars"></i>
-        </button>
+        <ng-container *ngIf="!hideNav">
+            <div class="nav-desktop flex gap-3 align-items-center">
+                <a *ngFor="let item of items" pRipple class="cursor-pointer" [ngClass]="item.styleClass" [routerLink]="item.routerLink" routerLinkActive="nav-link--active" [routerLinkActiveOptions]="{exact: true}">{{ item.label }}</a>
+            </div>
+            <a routerLink="/profile" routerLinkActive="avatar--active" class="nav-desktop">
+                <p-avatar icon="pi pi-user" class="mr-2" size="large" shape="circle"></p-avatar>
+            </a>
+            <button class="nav-burger" (click)="menuOpen = true">
+                <i class="pi pi-bars"></i>
+            </button>
+        </ng-container>
     </ng-template>
 </p-menubar>
 
