@@ -42,12 +42,14 @@ export class RegisterComponent {
                 if (message.includes('Username')) {
                     this.messageService.add({
                         severity: 'error',
-                        detail: 'Nom d\'utilisateur déjà utilisé'
+                        summary: 'Ce nom d\'utilisateur est déjà lié à un compte',
+                        detail: 'Veuillez en choisir un autre'
                     });
                 } else if (message.includes('Email')) {
                     this.messageService.add({
                         severity: 'error',
-                        detail: 'Email déjà utilisé'
+                        summary: 'Cette adresse email est déjà liée à un compte',
+                        detail: 'Veuillez en choisir un autre'
                     });
                 } else {
                     this.messageService.add({
