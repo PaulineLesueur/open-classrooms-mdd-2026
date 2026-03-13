@@ -5,10 +5,15 @@ import com.openclassrooms.mddapi.dto.requests.RegisterRequest;
 import com.openclassrooms.mddapi.dto.requests.UserPasswordRequest;
 import com.openclassrooms.mddapi.dto.requests.UserRequest;
 import com.openclassrooms.mddapi.dto.responses.AuthResponse;
+import com.openclassrooms.mddapi.dto.responses.ThemeResponse;
 import com.openclassrooms.mddapi.dto.responses.UserResponse;
+import com.openclassrooms.mddapi.entities.Theme;
 import com.openclassrooms.mddapi.entities.User;
+import com.openclassrooms.mddapi.mappers.ThemeMapper;
 import com.openclassrooms.mddapi.mappers.UserMapper;
+import com.openclassrooms.mddapi.repositories.ThemeRepository;
 import com.openclassrooms.mddapi.repositories.UserRepository;
+import com.openclassrooms.mddapi.security.AuthUtils;
 import com.openclassrooms.mddapi.security.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,7 +21,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.UUID;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -27,6 +33,9 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
     private final AuthenticationManager authenticationManager;
+    private final AuthUtils authUtils;
+    private final ThemeRepository themeRepository;
+    private final ThemeMapper themeMapper;
 
     public UserResponse getById(String id) {
         User user = userRepository.findById(id)
@@ -88,5 +97,39 @@ public class UserService {
 
         String token = jwtTokenProvider.generateToken(user.getEmail());
         return new AuthResponse(token);
+    }
+
+    public void subscribe(Integer themeId) {
+        User currentUser = authUtils.getCurrentUser();
+        Theme theme = themeRepository.findById(themeId)
+                .orElseThrow(() -> new RuntimeException("Theme not found with id : " + themeId));
+
+        if (currentUser.getSubscriptions().contains(theme)) {
+            throw new RuntimeException("You are already subscribed to this theme");
+        }
+
+        currentUser.getSubscriptions().add(theme);
+        userRepository.save(currentUser);
+    }
+
+    public void unsubscribe(Integer themeId) {
+        User currentUser = authUtils.getCurrentUser();
+        Theme theme = themeRepository.findById(themeId)
+                .orElseThrow(() -> new RuntimeException("Theme not found with id : " + themeId));
+
+        if (!currentUser.getSubscriptions().contains(theme)) {
+            throw new RuntimeException("You are not subscribed to this theme");
+        }
+
+        currentUser.getSubscriptions().remove(theme);
+        userRepository.save(currentUser);
+    }
+
+    public List<ThemeResponse> getSubscriptions() {
+        User currentUser = authUtils.getCurrentUser();
+        return currentUser.getSubscriptions()
+                .stream()
+                .map(themeMapper::toResponse)
+                .collect(Collectors.toList());
     }
 }
