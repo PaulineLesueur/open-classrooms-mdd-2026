@@ -2,14 +2,19 @@
 <main>
     <section id="profile">
         <h2 class="bold mb-4">Profil utilisateur</h2>
-        <div class="flex flex-column row-gap-2 form">
-            <input type="text" pInputText value="Username" />
-            <input type="text" pInputText value="email@email.fr" />
-            <p-password [(ngModel)]="password" [toggleMask]="true" [feedback]="false"></p-password>
-            <div class="mt-3 mb-4 flex justify-content-center container-button">
-                <p-button styleClass="p-button-primary" label="Sauvegarder"></p-button>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="flex flex-column row-gap-2 form">
+                <input type="text" pInputText formControlName="username" placeholder="Nom d'utilisateur" />
+                <input type="text" pInputText formControlName="email" placeholder="Email" />
+                <p-password formControlName="password" [toggleMask]="true" [feedback]="false" placeholder="Nouveau mot de passe"></p-password>
+                <small class="p-error" *ngIf="form.get('password')?.invalid && form.get('password')?.dirty">
+                    Le mot de passe doit contenir au minimum 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.
+                </small>
+                <div class="mt-3 mb-4 flex justify-content-center container-button">
+                    <p-button styleClass="p-button-primary" label="Sauvegarder" type="submit"></p-button>
+                </div>
             </div>
-        </div>
+        </form>
     </section>
     <section id="subscriptions">
         <h2 class="bold">Abonnements</h2>
