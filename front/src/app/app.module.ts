@@ -27,6 +27,8 @@ import { PasswordModule } from 'primeng/password';
 import { SidebarModule } from 'primeng/sidebar';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, NavbarComponent, RegisterComponent, LoginComponent, FeedComponent, ThemesListComponent, ArticleDetailComponent, CreateFormComponent, ProfileComponent],
@@ -50,7 +52,12 @@ import { ToastModule } from 'primeng/toast';
     ToastModule,
   ],
   providers: [
-    MessageService
+    MessageService,
+    {
+        provide: HTTP_INTERCEPTORS,
+        useClass: AuthInterceptor,
+        multi: true
+    }
   ],
   bootstrap: [AppComponent],
 })
