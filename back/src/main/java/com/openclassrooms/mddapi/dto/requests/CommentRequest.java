@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
@@ -14,6 +15,6 @@ public class CommentRequest {
     @NotBlank(message = "Author is mandatory")
     private String authorId;
 
-    @NotBlank(message = "Article is mandatory")
+    @NotNull(message = "Article is mandatory")
     private Long articleId;
 }
