@@ -2,34 +2,27 @@
 <main>
     <section id="profile">
         <h2 class="bold mb-4">Profil utilisateur</h2>
-        <div class="flex flex-column row-gap-2 form">
-            <input type="text" pInputText value="Username" />
-            <input type="text" pInputText value="email@email.fr" />
-            <p-password [(ngModel)]="password" [toggleMask]="true" [feedback]="false"></p-password>
-            <div class="mt-3 mb-4 flex justify-content-center container-button">
-                <p-button styleClass="p-button-primary" label="Sauvegarder"></p-button>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="flex flex-column row-gap-2 form">
+                <input type="text" pInputText formControlName="username" placeholder="Nom d'utilisateur" />
+                <input type="text" pInputText formControlName="email" placeholder="Email" />
+                <p-password formControlName="password" [toggleMask]="true" [feedback]="false" placeholder="Nouveau mot de passe"></p-password>
+                <small class="p-error" *ngIf="form.get('password')?.invalid && form.get('password')?.dirty">
+                    Le mot de passe doit contenir au minimum 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.
+                </small>
+                <div class="mt-3 mb-4 flex justify-content-center container-button">
+                    <p-button styleClass="p-button-primary" label="Sauvegarder" type="submit"></p-button>
+                </div>
             </div>
-        </div>
+        </form>
     </section>
     <section id="subscriptions">
         <h2 class="bold">Abonnements</h2>
         <div class="mt-5 flex column-gap-6 row-gap-5 flex-wrap">
-            <p-card header="Titre du thème">
-                <p>Content: lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled...</p>
+            <p-card *ngFor="let sub of subscriptions" [header]="sub.name">
+                <p>{{ sub.description }}</p>
                 <div class="mt-3 flex justify-content-center container-button">
-                    <p-button label="Se désabonner" styleClass="p-button-primary"></p-button>
-                </div>
-            </p-card>
-            <p-card header="Titre du thème">
-                <p>Content: lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled...</p>
-                <div class="mt-3 flex justify-content-center container-button">
-                    <p-button label="Se désabonner" styleClass="p-button-primary"></p-button>
-                </div>
-            </p-card>
-            <p-card header="Titre du thème">
-                <p>Content: lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled...</p>
-                <div class="mt-3 flex justify-content-center container-button">
-                    <p-button label="Se désabonner" styleClass="p-button-primary"></p-button>
+                    <p-button label="Se désabonner" styleClass="p-button-primary" (onClick)="unsubscribe(sub.id)"></p-button>
                 </div>
             </p-card>
         </div>

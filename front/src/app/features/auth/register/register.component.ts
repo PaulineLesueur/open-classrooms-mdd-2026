@@ -31,7 +31,7 @@ export class RegisterComponent {
         if (this.form.invalid) return;
         this.authService.register(this.form.value).subscribe({
             next: (response) => {
-                this.authService.saveToken(response.token);
+                this.authService.saveUser(response);
                 this.messageService.add({
                     severity: 'success',
                     detail: 'Compte créé avec succès !'

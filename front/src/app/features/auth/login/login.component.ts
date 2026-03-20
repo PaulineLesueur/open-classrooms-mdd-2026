@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(this.form.value).subscribe({
       next: (response) => {
-        this.authService.saveToken(response.token);
+        this.authService.saveUser(response);
         this.router.navigate(['/feed']);
       },
       error: (err) => {

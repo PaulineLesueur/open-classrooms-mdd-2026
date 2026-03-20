@@ -2,16 +2,30 @@
 <main>
     <div class="flex justify-content-between buttons-container">
         <p-button label="Créer un article" styleClass="p-button-primary" routerLink="/article/create"></p-button>
-        <p-button label="Trier par" styleClass="p-button-secondary" icon="pi pi-arrow-down" iconPos="right"></p-button>
+        <p-button
+            label="Trier par"
+            styleClass="p-button-secondary"
+            [icon]="selectedSort === 'desc' ? 'pi pi-arrow-down' : 'pi pi-arrow-up'"
+            iconPos="right"
+            (onClick)="onSortChange()">
+        </p-button>
     </div>
 
-    <div class="mt-5 flex column-gap-6 row-gap-5 flex-wrap">
-        <p-card header="Titre de l'article" routerLink="/article/detail">
+    <div *ngIf="isLoading" class="mt-5">
+        <p>Chargement...</p>
+    </div>
+
+    <div *ngIf="!isLoading" class="mt-5 flex column-gap-6 row-gap-5 flex-wrap">
+        <p-card
+            *ngFor="let article of articles"
+            [header]="article.title"
+            [routerLink]="['/article/detail', article.id]"
+            class="cursor-pointer">
             <ng-template pTemplate="subtitle">
-            <div>Date : 26 février 2026</div>
-            <div>Auteur : Jean Dupont</div>
+                <div>Date : {{ article.createdAt | date:'dd/MM/yyyy' }}</div>
+                <div>Auteur : {{ article.authorUsername }}</div>
             </ng-template>
-            <p>Content: lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled...</p>
+            <p>{{ article.content | slice:0:150 }}...</p>
         </p-card>
     </div>
 </main>
