@@ -1,3 +1,4 @@
+/** Represents an article returned by the API. */
 export interface ArticleResponse {
     id: number;
     title: string;
@@ -7,6 +8,7 @@ export interface ArticleResponse {
     createdAt: string;
 }
 
+/** Payload sent to the API to create a new article. */
 export interface ArticleRequest {
     title: string;
     content: string;

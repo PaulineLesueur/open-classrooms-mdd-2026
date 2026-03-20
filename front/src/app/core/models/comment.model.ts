@@ -1,3 +1,4 @@
+/** Represents a comment returned by the API. */
 export interface CommentResponse {
     id: number;
     body: string;
@@ -5,6 +6,7 @@ export interface CommentResponse {
     createdAt: string;
 }
 
+/** Payload sent to the API to create a new comment. */
 export interface CommentRequest {
     body: string;
     authorId: string;
