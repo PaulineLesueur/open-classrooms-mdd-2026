@@ -6,6 +6,9 @@ import lombok.Setter;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+/**
+ * Request DTO for creating a new comment on an article.
+ */
 @Getter
 @Setter
 public class CommentRequest {

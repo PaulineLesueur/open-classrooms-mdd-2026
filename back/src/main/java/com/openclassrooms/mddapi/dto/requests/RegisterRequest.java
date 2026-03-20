@@ -8,6 +8,11 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+/**
+ * Request DTO for user registration.
+ * The password must be at least 8 characters long and contain at least one uppercase letter,
+ * one lowercase letter, one digit, and one special character.
+ */
 @Getter
 @Setter
 public class RegisterRequest {

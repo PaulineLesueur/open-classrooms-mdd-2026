@@ -3,6 +3,10 @@ package com.openclassrooms.mddapi.dto.responses;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Response DTO returned after a successful login or registration.
+ * Contains the JWT token and basic user information.
+ */
 @Getter
 @Setter
 public class AuthResponse {

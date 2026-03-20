@@ -7,6 +7,9 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+/**
+ * Request DTO for updating a user's profile information (username and email).
+ */
 @Getter
 @Setter
 public class UserRequest {

@@ -7,6 +7,9 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+/**
+ * Request DTO for creating a new article.
+ */
 @Getter
 @Setter
 public class ArticleRequest {
