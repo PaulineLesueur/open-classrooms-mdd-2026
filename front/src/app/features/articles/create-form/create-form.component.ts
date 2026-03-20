@@ -59,6 +59,10 @@ export class CreateFormComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (article) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Article créé avec succès'
+          });
           this.router.navigate(['/article/detail', article.id]);
         },
         error: () => {

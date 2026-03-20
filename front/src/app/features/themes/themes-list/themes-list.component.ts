@@ -55,6 +55,10 @@ export class ThemesListComponent implements OnInit, OnDestroy {
       .subscribe({
         next: () => {
           this.subscribedIds = new Set([...this.subscribedIds, themeId]);
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Abonnement enregistré',
+          });
         },
         error: () => {
           this.messageService.add({
