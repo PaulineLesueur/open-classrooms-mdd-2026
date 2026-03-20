@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { ThemeResponse } from '../../core/models/theme.model';
 import { AuthService } from '../../core/services/auth.service';
+import { SubscriptionService } from '../../core/services/subscription.service';
 import { UserService } from '../../core/services/user.service';
 import { passwordValidator } from '../../core/validators/password.validator';
 
@@ -10,15 +14,18 @@ import { passwordValidator } from '../../core/validators/password.validator';
     templateUrl: './profile.component.html',
     styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, OnDestroy {
 
     form: FormGroup;
     userId: string = '';
+    subscriptions: ThemeResponse[] = [];
+    private destroy$ = new Subject<void>();
 
     constructor(
         private fb: FormBuilder,
         private authService: AuthService,
         private userService: UserService,
+        private subscriptionService: SubscriptionService,
         private messageService: MessageService
     ) {
         this.form = this.fb.group({
@@ -34,6 +41,44 @@ export class ProfileComponent implements OnInit {
             username: this.authService.getUsername(),
             email: this.authService.getEmail()
         });
+        this.loadSubscriptions();
+    }
+
+    loadSubscriptions(): void {
+        this.subscriptionService.getUserSubscriptions()
+            .pipe(takeUntil(this.destroy$))
+            .subscribe({
+                next: (data) => { this.subscriptions = data; },
+                error: () => {
+                    this.messageService.add({
+                        severity: 'error',
+                        summary: 'Erreur',
+                        detail: 'Impossible de charger les abonnements'
+                    });
+                }
+            });
+    }
+
+    unsubscribe(themeId: number): void {
+        this.subscriptionService.unsubscribe(themeId)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe({
+                next: () => {
+                    this.subscriptions = this.subscriptions.filter(s => s.id !== themeId);
+                    this.messageService.add({
+                        severity: 'success',
+                        summary: 'Succès',
+                        detail: 'Désabonnement effectué'
+                    });
+                },
+                error: () => {
+                    this.messageService.add({
+                        severity: 'error',
+                        summary: 'Erreur',
+                        detail: 'Erreur lors du désabonnement'
+                    });
+                }
+            });
     }
 
     onSubmit(): void {
@@ -97,5 +142,10 @@ export class ProfileComponent implements OnInit {
                 }
             }
         });
+    }
+
+    ngOnDestroy(): void {
+        this.destroy$.next();
+        this.destroy$.complete();
     }
 }
