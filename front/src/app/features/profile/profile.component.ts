@@ -67,8 +67,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
                     this.subscriptions = this.subscriptions.filter(s => s.id !== themeId);
                     this.messageService.add({
                         severity: 'success',
-                        summary: 'Succès',
-                        detail: 'Désabonnement effectué'
+                        summary: 'Désabonnement enregistré',
                     });
                 },
                 error: () => {
@@ -99,8 +98,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
                         next: () => {
                             this.messageService.add({
                                 severity: 'success',
-                                summary: 'Succès',
-                                detail: 'Profil mis à jour avec succès'
+                                summary: 'Profil mis à jour avec succès'
                             });
                         },
                         error: () => {
@@ -114,8 +112,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
                 } else {
                     this.messageService.add({
                         severity: 'success',
-                        summary: 'Succès',
-                        detail: 'Profil mis à jour avec succès'
+                        summary: 'Profil mis à jour avec succès'
                     });
                 }
             },
