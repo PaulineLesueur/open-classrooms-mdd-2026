@@ -5,6 +5,9 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 
+/**
+ * Response DTO representing a comment returned to the client.
+ */
 @Getter
 @Setter
 public class CommentResponse {

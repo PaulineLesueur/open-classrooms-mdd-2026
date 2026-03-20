@@ -23,6 +23,17 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import java.util.List;
 
+/**
+ * Spring Security configuration for the MDD API.
+ * <p>
+ * Sets up a stateless JWT-based security model:
+ * <ul>
+ *   <li>CSRF disabled (stateless REST API).</li>
+ *   <li>CORS allows requests from {@code http://localhost:4200}.</li>
+ *   <li>Public routes: {@code /api/auth/**} and Swagger UI.</li>
+ *   <li>All other routes require a valid JWT token.</li>
+ * </ul>
+ */
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -31,6 +42,13 @@ public class SecurityConfig {
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final UserDetailsServiceImpl userDetailsService;
 
+    /**
+     * Configures the HTTP security filter chain.
+     *
+     * @param http the {@link HttpSecurity} to configure
+     * @return the built {@link SecurityFilterChain}
+     * @throws Exception if an error occurs during configuration
+     */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
@@ -50,6 +68,11 @@ public class SecurityConfig {
         return http.build();
     }
 
+    /**
+     * Configures CORS to allow requests from the Angular frontend.
+     *
+     * @return the {@link CorsConfigurationSource} applied globally
+     */
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
@@ -63,6 +86,12 @@ public class SecurityConfig {
         return source;
     }
 
+    /**
+     * Creates a {@link DaoAuthenticationProvider} wired with {@link UserDetailsServiceImpl}
+     * and BCrypt password encoding, used during login.
+     *
+     * @return the configured {@link AuthenticationProvider}
+     */
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
@@ -71,11 +100,23 @@ public class SecurityConfig {
         return provider;
     }
 
+    /**
+     * Exposes the {@link AuthenticationManager} bean for use in the authentication service.
+     *
+     * @param config the Spring authentication configuration
+     * @return the {@link AuthenticationManager}
+     * @throws Exception if an error occurs
+     */
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
 
+    /**
+     * Provides the BCrypt password encoder bean.
+     *
+     * @return a {@link BCryptPasswordEncoder} instance
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

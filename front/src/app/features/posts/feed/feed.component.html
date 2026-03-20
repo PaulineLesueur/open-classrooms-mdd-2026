@@ -1,0 +1,31 @@
+<app-navbar></app-navbar>
+<main>
+    <div class="flex justify-content-between buttons-container">
+        <p-button label="Créer un article" styleClass="p-button-primary" routerLink="/post/create"></p-button>
+        <p-button
+            label="Trier par"
+            styleClass="p-button-secondary"
+            [icon]="selectedSort === 'desc' ? 'pi pi-arrow-down' : 'pi pi-arrow-up'"
+            iconPos="right"
+            (onClick)="onSortChange()">
+        </p-button>
+    </div>
+
+    <div *ngIf="isLoading" class="mt-5">
+        <p>Chargement...</p>
+    </div>
+
+    <div *ngIf="!isLoading" class="mt-5 flex column-gap-6 row-gap-5 flex-wrap">
+        <p-card
+            *ngFor="let post of posts"
+            [header]="post.title"
+            [routerLink]="['/post/detail', post.id]"
+            class="cursor-pointer">
+            <ng-template pTemplate="subtitle">
+                <div>Date : {{ post.createdAt | date:'dd/MM/yyyy' }}</div>
+                <div>Auteur : {{ post.authorUsername }}</div>
+            </ng-template>
+            <p>{{ post.content | slice:0:150 }}...</p>
+        </p-card>
+    </div>
+</main>

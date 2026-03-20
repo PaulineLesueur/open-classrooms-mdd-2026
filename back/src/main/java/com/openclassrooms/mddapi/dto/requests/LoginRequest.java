@@ -5,6 +5,10 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 
+/**
+ * Request DTO for user login.
+ * The {@code identifier} field accepts either an email address or a username.
+ */
 @Getter
 @Setter
 public class LoginRequest {

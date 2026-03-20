@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { ThemeResponse } from '../../core/models/theme.model';
+import { TopicResponse } from '../../core/models/topic.model';
 import { AuthService } from '../../core/services/auth.service';
 import { SubscriptionService } from '../../core/services/subscription.service';
 import { UserService } from '../../core/services/user.service';
@@ -18,7 +18,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
     form: FormGroup;
     userId: string = '';
-    subscriptions: ThemeResponse[] = [];
+    subscriptions: TopicResponse[] = [];
     private destroy$ = new Subject<void>();
 
     constructor(
@@ -59,12 +59,12 @@ export class ProfileComponent implements OnInit, OnDestroy {
             });
     }
 
-    unsubscribe(themeId: number): void {
-        this.subscriptionService.unsubscribe(themeId)
+    unsubscribe(topicId: number): void {
+        this.subscriptionService.unsubscribe(topicId)
             .pipe(takeUntil(this.destroy$))
             .subscribe({
                 next: () => {
-                    this.subscriptions = this.subscriptions.filter(s => s.id !== themeId);
+                    this.subscriptions = this.subscriptions.filter(s => s.id !== topicId);
                     this.messageService.add({
                         severity: 'success',
                         summary: 'Désabonnement enregistré',

@@ -11,6 +11,14 @@ import org.springframework.stereotype.Component;
 import java.security.Key;
 import java.util.Date;
 
+/**
+ * Component responsible for generating, parsing, and validating JWT tokens.
+ * <p>
+ * Tokens are signed with an HMAC-SHA512 key configured via {@code jwt.secret},
+ * and expire after the duration configured via {@code jwt.expiration} (in milliseconds).
+ * The token subject is the user's UUID.
+ * </p>
+ */
 @Component
 public class JwtTokenProvider {
 
@@ -20,6 +28,12 @@ public class JwtTokenProvider {
     @Value("${jwt.expiration}")
     private long jwtExpiration;
 
+    /**
+     * Generates a signed JWT token with the given identifier as the subject.
+     *
+     * @param identifier the value to set as the token subject (user UUID)
+     * @return the compact serialized JWT string
+     */
     public String generateToken(String identifier) {
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + jwtExpiration);
@@ -32,6 +46,12 @@ public class JwtTokenProvider {
                 .compact();
     }
 
+    /**
+     * Extracts the subject (user UUID) from a JWT token.
+     *
+     * @param token the JWT string to parse
+     * @return the subject stored in the token
+     */
     public String getIdentifierFromToken(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(getSigningKey())
@@ -41,6 +61,12 @@ public class JwtTokenProvider {
                 .getSubject();
     }
 
+    /**
+     * Validates a JWT token by verifying its signature and expiration.
+     *
+     * @param token the JWT string to validate
+     * @return {@code true} if the token is valid, {@code false} otherwise
+     */
     public boolean validateToken(String token) {
         try {
             Jwts.parserBuilder()

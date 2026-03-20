@@ -1,0 +1,26 @@
+<app-navbar></app-navbar>
+<main>
+    <a class="back-arrow" routerLink="/feed"><i class="pi pi-arrow-left"></i></a>
+    <section>
+        <h2 class="mb-5 bold">Créer un nouvel article</h2>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="flex flex-column row-gap-3">
+            <p-dropdown
+                formControlName="topicId"
+                [options]="topics"
+                optionLabel="name"
+                optionValue="id"
+                placeholder="Sélectionner un thème">
+            </p-dropdown>
+            <input type="text" pInputText formControlName="title" placeholder="Titre de l'article" />
+            <textarea rows="6" pInputTextarea formControlName="content" placeholder="Contenu de l'article"></textarea>
+            <div class="mt-4 flex justify-content-center">
+                <p-button
+                    styleClass="p-button-primary"
+                    label="Créer"
+                    type="submit"
+                    [disabled]="form.invalid || isSubmitting">
+                </p-button>
+            </div>
+        </form>
+    </section>
+</main>

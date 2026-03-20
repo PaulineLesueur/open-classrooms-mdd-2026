@@ -5,6 +5,9 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 
+/**
+ * Request DTO for updating a user's password.
+ */
 @Getter
 @Setter
 public class UserPasswordRequest {

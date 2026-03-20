@@ -16,11 +16,11 @@ import { RippleModule } from 'primeng/ripple';
 import { AvatarModule } from 'primeng/avatar';
 import { RegisterComponent } from './features/auth/register/register.component';
 import { LoginComponent } from './features/auth/login/login.component';
-import { FeedComponent } from './features/articles/feed/feed.component';
-import { ThemesListComponent } from './features/themes/themes-list/themes-list.component';
-import { ArticleDetailComponent } from './features/articles/article-detail/article-detail.component';
+import { FeedComponent } from './features/posts/feed/feed.component';
+import { TopicsListComponent } from './features/topics/topics-list/topics-list.component';
+import { PostDetailComponent } from './features/posts/post-detail/post-detail.component';
 import { InputTextareaModule } from 'primeng/inputtextarea';
-import { CreateFormComponent } from './features/articles/create-form/create-form.component';
+import { CreateFormComponent } from './features/posts/create-form/create-form.component';
 import { DropdownModule } from 'primeng/dropdown';
 import { ProfileComponent } from './features/profile/profile.component';
 import { PasswordModule } from 'primeng/password';
@@ -31,7 +31,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, NavbarComponent, RegisterComponent, LoginComponent, FeedComponent, ThemesListComponent, ArticleDetailComponent, CreateFormComponent, ProfileComponent],
+  declarations: [AppComponent, HomeComponent, NavbarComponent, RegisterComponent, LoginComponent, FeedComponent, TopicsListComponent, PostDetailComponent, CreateFormComponent, ProfileComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

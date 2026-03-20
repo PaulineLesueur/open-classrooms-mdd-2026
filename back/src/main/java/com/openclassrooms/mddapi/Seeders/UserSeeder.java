@@ -22,7 +22,7 @@ public class UserSeeder implements CommandLineRunner {
             User user = new User();
             user.setUsername("Usertest");
             user.setEmail("test@test.com");
-            user.setPassword(passwordEncoder.encode("password123"));
+            user.setPassword(passwordEncoder.encode("Test1234!"));
             userRepository.save(user);
             System.out.println("Default user created");
         }

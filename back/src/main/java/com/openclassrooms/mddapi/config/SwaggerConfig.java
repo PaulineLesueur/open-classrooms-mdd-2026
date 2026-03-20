@@ -8,9 +8,18 @@ import io.swagger.v3.oas.models.security.SecurityScheme;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * OpenAPI (Swagger) configuration for the MDD API.
+ * Adds a Bearer JWT security scheme to all documented endpoints.
+ */
 @Configuration
 public class SwaggerConfig {
 
+    /**
+     * Builds the {@link OpenAPI} bean with API metadata and JWT security scheme.
+     *
+     * @return the configured {@link OpenAPI} instance
+     */
     @Bean
     public OpenAPI openAPI() {
         return new OpenAPI()

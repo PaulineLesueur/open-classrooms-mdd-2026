@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { ThemeResponse } from '../models/theme.model';
+import { TopicResponse } from '../models/topic.model';
 
 @Injectable({
     providedIn: 'root'
@@ -13,15 +13,15 @@ export class SubscriptionService {
 
     constructor(private http: HttpClient) {}
 
-    getUserSubscriptions(): Observable<ThemeResponse[]> {
-        return this.http.get<ThemeResponse[]>(this.apiUrl);
+    getUserSubscriptions(): Observable<TopicResponse[]> {
+        return this.http.get<TopicResponse[]>(this.apiUrl);
     }
 
-    subscribe(themeId: number): Observable<void> {
-        return this.http.post<void>(`${this.apiUrl}/${themeId}`, {});
+    subscribe(topicId: number): Observable<void> {
+        return this.http.post<void>(`${this.apiUrl}/${topicId}`, {});
     }
 
-    unsubscribe(themeId: number): Observable<void> {
-        return this.http.delete<void>(`${this.apiUrl}/${themeId}`);
+    unsubscribe(topicId: number): Observable<void> {
+        return this.http.delete<void>(`${this.apiUrl}/${topicId}`);
     }
 }
