@@ -3,6 +3,10 @@ main {
     column-gap: 1.5rem;
 }
 
+section {
+    flex: 1;
+}
+
 h2 {
     font-weight: 500;
     text-align: left;
