@@ -24,6 +24,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Service class handling business logic for user management and authentication.
+ * <p>
+ * Covers registration, login, profile updates, password changes, and theme subscriptions.
+ * </p>
+ */
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -37,12 +43,27 @@ public class UserService {
     private final ThemeRepository themeRepository;
     private final ThemeMapper themeMapper;
 
+    /**
+     * Retrieves a user by their ID.
+     *
+     * @param id the UUID of the user
+     * @return the user as a response DTO
+     * @throws RuntimeException if no user is found with the given ID
+     */
     public UserResponse getById(String id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("No user found with the id : " + id));
         return userMapper.toResponse(user);
     }
 
+    /**
+     * Updates a user's profile information (username and email).
+     *
+     * @param id      the UUID of the user to update
+     * @param request the DTO containing the new username and email
+     * @return the updated user as a response DTO
+     * @throws RuntimeException if the user is not found, or if the new username/email is already in use
+     */
     public UserResponse update(String id, UserRequest request) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("No user found with the id : " + id));
@@ -59,6 +80,14 @@ public class UserService {
         return userMapper.toResponse(userRepository.save(user));
     }
 
+    /**
+     * Updates a user's password.
+     *
+     * @param id      the UUID of the user
+     * @param request the DTO containing the new plain-text password
+     * @return the updated user as a response DTO
+     * @throws RuntimeException if no user is found with the given ID
+     */
     public UserResponse updatePassword(String id, UserPasswordRequest request) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("No user found with the id : " + id));
@@ -66,6 +95,13 @@ public class UserService {
         return userMapper.toResponse(userRepository.save(user));
     }
 
+    /**
+     * Registers a new user and returns a JWT token.
+     *
+     * @param request the DTO containing the registration data
+     * @return an auth response with the JWT token and user information
+     * @throws RuntimeException if the email or username is already in use
+     */
     public AuthResponse register(RegisterRequest request) {
         if (userRepository.existsByEmail(request.getEmail())) {
             throw new RuntimeException("Email already in use");
@@ -84,6 +120,13 @@ public class UserService {
         return new AuthResponse(token, user.getId(), user.getUsername(), user.getEmail());
     }
 
+    /**
+     * Authenticates a user and returns a JWT token.
+     *
+     * @param request the DTO containing the identifier (email or username) and password
+     * @return an auth response with the JWT token and user information
+     * @throws RuntimeException if the credentials are invalid or the user is not found
+     */
     public AuthResponse login(LoginRequest request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -99,6 +142,12 @@ public class UserService {
         return new AuthResponse(token, user.getId(), user.getUsername(), user.getEmail());
     }
 
+    /**
+     * Subscribes the currently authenticated user to a theme.
+     *
+     * @param themeId the ID of the theme to subscribe to
+     * @throws RuntimeException if the theme is not found or the user is already subscribed
+     */
     public void subscribe(Integer themeId) {
         User currentUser = authUtils.getCurrentUser();
         Theme theme = themeRepository.findById(themeId)
@@ -112,6 +161,12 @@ public class UserService {
         userRepository.save(currentUser);
     }
 
+    /**
+     * Unsubscribes the currently authenticated user from a theme.
+     *
+     * @param themeId the ID of the theme to unsubscribe from
+     * @throws RuntimeException if the theme is not found or the user is not subscribed
+     */
     public void unsubscribe(Integer themeId) {
         User currentUser = authUtils.getCurrentUser();
         Theme theme = themeRepository.findById(themeId)
@@ -125,6 +180,11 @@ public class UserService {
         userRepository.save(currentUser);
     }
 
+    /**
+     * Retrieves the list of themes the currently authenticated user is subscribed to.
+     *
+     * @return a list of subscribed themes as response DTOs
+     */
     public List<ThemeResponse> getSubscriptions() {
         User currentUser = authUtils.getCurrentUser();
         return currentUser.getSubscriptions()

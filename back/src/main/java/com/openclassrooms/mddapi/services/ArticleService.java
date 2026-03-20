@@ -15,6 +15,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Service class handling business logic for articles.
+ */
 @Service
 @RequiredArgsConstructor
 public class ArticleService {
@@ -23,6 +26,11 @@ public class ArticleService {
     private final ThemeRepository themeRepository;
     private final ArticleMapper articleMapper;
 
+    /**
+     * Retrieves all articles.
+     *
+     * @return a list of all articles as response DTOs
+     */
     public List<ArticleResponse> getAll() {
         return articleRepository.findAll()
                 .stream()
@@ -30,12 +38,26 @@ public class ArticleService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Retrieves a single article by its ID.
+     *
+     * @param id the ID of the article
+     * @return the article as a response DTO
+     * @throws RuntimeException if no article is found with the given ID
+     */
     public ArticleResponse getById(Long id) {
         Article article = articleRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Article not found with id : " + id));
         return articleMapper.toResponse(article);
     }
 
+    /**
+     * Creates and persists a new article.
+     *
+     * @param request the DTO containing the article data
+     * @return the created article as a response DTO
+     * @throws RuntimeException if the author or theme is not found
+     */
     public ArticleResponse create(ArticleRequest request) {
         User author = userRepository.findById(request.getAuthorId())
                 .orElseThrow(() -> new RuntimeException("User not found with id : " + request.getAuthorId()));

@@ -15,6 +15,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Service class handling business logic for comments.
+ */
 @Service
 @RequiredArgsConstructor
 public class CommentService {
@@ -24,6 +27,12 @@ public class CommentService {
     private final ArticleRepository articleRepository;
     private final CommentMapper commentMapper;
 
+    /**
+     * Retrieves all comments for a given article.
+     *
+     * @param articleId the ID of the article
+     * @return a list of comments as response DTOs
+     */
     public List<CommentResponse> getByArticleId(Long articleId) {
         return commentRepository.findByArticleId(articleId)
                 .stream()
@@ -31,6 +40,13 @@ public class CommentService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Creates and persists a new comment.
+     *
+     * @param request the DTO containing the comment data
+     * @return the created comment as a response DTO
+     * @throws RuntimeException if the author or article is not found
+     */
     public CommentResponse create(CommentRequest request) {
         User author = userRepository.findById(request.getAuthorId())
                 .orElseThrow(() -> new RuntimeException("User not found with id : " + request.getAuthorId()));
