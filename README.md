@@ -168,6 +168,13 @@ mvn javadoc:javadoc
 ```
 The generated documentation is available in `back/target/site/apidocs/index.html`.
 
+### Backend (Swagger UI)
+With the backend running, the interactive API documentation is available at:
+
+`http://localhost:8080/swagger-ui.html`
+
+It is powered by **springdoc-openapi** and lists all endpoints with their request/response schemas. To test protected routes directly from the UI, click **Authorize** and enter your JWT token as `Bearer <token>`.
+
 <br>
 
 ## Notes
