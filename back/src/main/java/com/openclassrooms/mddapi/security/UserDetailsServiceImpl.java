@@ -27,4 +27,15 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 .authorities(Collections.emptyList())
                 .build();
     }
+
+    public UserDetails loadUserById(String id) throws UsernameNotFoundException {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with id : " + id));
+
+        return org.springframework.security.core.userdetails.User
+                .withUsername(user.getEmail())
+                .password(user.getPassword())
+                .authorities(Collections.emptyList())
+                .build();
+    }
 }

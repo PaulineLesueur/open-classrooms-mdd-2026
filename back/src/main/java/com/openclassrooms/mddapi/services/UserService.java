@@ -80,7 +80,7 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         userRepository.save(user);
 
-        String token = jwtTokenProvider.generateToken(user.getEmail());
+        String token = jwtTokenProvider.generateToken(user.getId());
         return new AuthResponse(token, user.getId(), user.getUsername(), user.getEmail());
     }
 
@@ -95,7 +95,7 @@ public class UserService {
         User user = userRepository.findByEmailOrUsername(request.getIdentifier(), request.getIdentifier())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        String token = jwtTokenProvider.generateToken(user.getEmail());
+        String token = jwtTokenProvider.generateToken(user.getId());
         return new AuthResponse(token, user.getId(), user.getUsername(), user.getEmail());
     }
 
