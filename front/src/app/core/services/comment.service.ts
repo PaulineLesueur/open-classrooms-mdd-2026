@@ -13,8 +13,8 @@ export class CommentService {
 
     constructor(private http: HttpClient) {}
 
-    getByArticle(articleId: number): Observable<CommentResponse[]> {
-        return this.http.get<CommentResponse[]>(`${this.baseUrl}/api/article/${articleId}/comments`);
+    getByPost(postId: number): Observable<CommentResponse[]> {
+        return this.http.get<CommentResponse[]>(`${this.baseUrl}/api/post/${postId}/comments`);
     }
 
     create(request: CommentRequest): Observable<CommentResponse> {

@@ -5,14 +5,14 @@ import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * JPA entity representing a registered user.
  * <p>
  * Each user has a unique UUID, a unique username and email, an encoded password,
- * and a list of theme subscriptions managed through the {@code subscriptions} join table.
+ * and a list of topic subscriptions managed through the {@code subscriptions} join table.
  * </p>
  */
 @Getter
@@ -39,12 +39,12 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    /** List of themes the user has subscribed to. */
+    /** List of topics the user has subscribed to. */
     @ManyToMany
     @JoinTable(
         name = "subscriptions",
         joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "theme_id")
+        inverseJoinColumns = @JoinColumn(name = "topic_id")
     )
-    private List<Theme> subscriptions;
+    private List<Topic> subscriptions = new ArrayList<>();
 }

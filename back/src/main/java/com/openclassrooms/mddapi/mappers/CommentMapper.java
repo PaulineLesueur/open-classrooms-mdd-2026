@@ -2,7 +2,7 @@ package com.openclassrooms.mddapi.mappers;
 
 import com.openclassrooms.mddapi.dto.requests.CommentRequest;
 import com.openclassrooms.mddapi.dto.responses.CommentResponse;
-import com.openclassrooms.mddapi.entities.Article;
+import com.openclassrooms.mddapi.entities.Post;
 import com.openclassrooms.mddapi.entities.Comment;
 import com.openclassrooms.mddapi.entities.User;
 import org.springframework.stereotype.Component;
@@ -34,14 +34,14 @@ public class CommentMapper {
      *
      * @param request the request DTO containing comment data
      * @param author  the user who posted the comment
-     * @param article the article the comment belongs to
+     * @param post    the post the comment belongs to
      * @return a new {@link Comment} entity (not yet persisted)
      */
-    public Comment toEntity(CommentRequest request, User author, Article article) {
+    public Comment toEntity(CommentRequest request, User author, Post post) {
         Comment comment = new Comment();
         comment.setBody(request.getBody());
         comment.setAuthor(author);
-        comment.setArticle(article);
+        comment.setPost(post);
         return comment;
     }
 }

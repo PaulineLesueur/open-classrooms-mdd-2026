@@ -10,5 +10,5 @@ export interface CommentResponse {
 export interface CommentRequest {
     body: string;
     authorId: string;
-    articleId: number;
+    postId: number;
 }

@@ -5,19 +5,24 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
- * Request DTO for creating a new comment on a post.
+ * Request DTO for creating a new post.
  */
 @Getter
 @Setter
-public class CommentRequest {
+public class PostRequest {
+    @NotBlank(message = "Title is mandatory")
+    @Size(max = 255)
+    private String title;
+
     @NotBlank(message = "Content is mandatory")
-    private String body;
+    private String content;
+
+    @NotNull(message = "Topic is mandatory")
+    private Integer topicId;
 
     @NotBlank(message = "Author is mandatory")
     private String authorId;
-
-    @NotNull(message = "Post is mandatory")
-    private Long postId;
 }

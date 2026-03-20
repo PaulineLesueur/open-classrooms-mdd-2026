@@ -7,21 +7,17 @@ import { TopicResponse } from '../models/topic.model';
 @Injectable({
     providedIn: 'root'
 })
-export class SubscriptionService {
+export class TopicService {
 
-    private apiUrl = `${environment.apiUrl}/api/subscriptions`;
+    private apiUrl = `${environment.apiUrl}/api/topics`;
 
     constructor(private http: HttpClient) {}
 
-    getUserSubscriptions(): Observable<TopicResponse[]> {
+    getAll(): Observable<TopicResponse[]> {
         return this.http.get<TopicResponse[]>(this.apiUrl);
     }
 
-    subscribe(topicId: number): Observable<void> {
-        return this.http.post<void>(`${this.apiUrl}/${topicId}`, {});
-    }
-
-    unsubscribe(topicId: number): Observable<void> {
-        return this.http.delete<void>(`${this.apiUrl}/${topicId}`);
+    getById(id: number): Observable<TopicResponse> {
+        return this.http.get<TopicResponse>(`${this.apiUrl}/${id}`);
     }
 }

@@ -5,13 +5,13 @@ import com.openclassrooms.mddapi.dto.requests.RegisterRequest;
 import com.openclassrooms.mddapi.dto.requests.UserPasswordRequest;
 import com.openclassrooms.mddapi.dto.requests.UserRequest;
 import com.openclassrooms.mddapi.dto.responses.AuthResponse;
-import com.openclassrooms.mddapi.dto.responses.ThemeResponse;
+import com.openclassrooms.mddapi.dto.responses.TopicResponse;
 import com.openclassrooms.mddapi.dto.responses.UserResponse;
-import com.openclassrooms.mddapi.entities.Theme;
+import com.openclassrooms.mddapi.entities.Topic;
 import com.openclassrooms.mddapi.entities.User;
-import com.openclassrooms.mddapi.mappers.ThemeMapper;
+import com.openclassrooms.mddapi.mappers.TopicMapper;
 import com.openclassrooms.mddapi.mappers.UserMapper;
-import com.openclassrooms.mddapi.repositories.ThemeRepository;
+import com.openclassrooms.mddapi.repositories.TopicRepository;
 import com.openclassrooms.mddapi.repositories.UserRepository;
 import com.openclassrooms.mddapi.security.AuthUtils;
 import com.openclassrooms.mddapi.security.JwtTokenProvider;
@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 /**
  * Service class handling business logic for user management and authentication.
  * <p>
- * Covers registration, login, profile updates, password changes, and theme subscriptions.
+ * Covers registration, login, profile updates, password changes, and topic subscriptions.
  * </p>
  */
 @Service
@@ -40,8 +40,8 @@ public class UserService {
     private final JwtTokenProvider jwtTokenProvider;
     private final AuthenticationManager authenticationManager;
     private final AuthUtils authUtils;
-    private final ThemeRepository themeRepository;
-    private final ThemeMapper themeMapper;
+    private final TopicRepository topicRepository;
+    private final TopicMapper topicMapper;
 
     /**
      * Retrieves a user by their ID.
@@ -143,53 +143,53 @@ public class UserService {
     }
 
     /**
-     * Subscribes the currently authenticated user to a theme.
+     * Subscribes the currently authenticated user to a topic.
      *
-     * @param themeId the ID of the theme to subscribe to
-     * @throws RuntimeException if the theme is not found or the user is already subscribed
+     * @param topicId the ID of the topic to subscribe to
+     * @throws RuntimeException if the topic is not found or the user is already subscribed
      */
-    public void subscribe(Integer themeId) {
+    public void subscribe(Integer topicId) {
         User currentUser = authUtils.getCurrentUser();
-        Theme theme = themeRepository.findById(themeId)
-                .orElseThrow(() -> new RuntimeException("Theme not found with id : " + themeId));
+        Topic topic = topicRepository.findById(topicId)
+                .orElseThrow(() -> new RuntimeException("Topic not found with id : " + topicId));
 
-        if (currentUser.getSubscriptions().contains(theme)) {
-            throw new RuntimeException("You are already subscribed to this theme");
+        if (currentUser.getSubscriptions().contains(topic)) {
+            throw new RuntimeException("You are already subscribed to this topic");
         }
 
-        currentUser.getSubscriptions().add(theme);
+        currentUser.getSubscriptions().add(topic);
         userRepository.save(currentUser);
     }
 
     /**
-     * Unsubscribes the currently authenticated user from a theme.
+     * Unsubscribes the currently authenticated user from a topic.
      *
-     * @param themeId the ID of the theme to unsubscribe from
-     * @throws RuntimeException if the theme is not found or the user is not subscribed
+     * @param topicId the ID of the topic to unsubscribe from
+     * @throws RuntimeException if the topic is not found or the user is not subscribed
      */
-    public void unsubscribe(Integer themeId) {
+    public void unsubscribe(Integer topicId) {
         User currentUser = authUtils.getCurrentUser();
-        Theme theme = themeRepository.findById(themeId)
-                .orElseThrow(() -> new RuntimeException("Theme not found with id : " + themeId));
+        Topic topic = topicRepository.findById(topicId)
+                .orElseThrow(() -> new RuntimeException("Topic not found with id : " + topicId));
 
-        if (!currentUser.getSubscriptions().contains(theme)) {
-            throw new RuntimeException("You are not subscribed to this theme");
+        if (!currentUser.getSubscriptions().contains(topic)) {
+            throw new RuntimeException("You are not subscribed to this topic");
         }
 
-        currentUser.getSubscriptions().remove(theme);
+        currentUser.getSubscriptions().remove(topic);
         userRepository.save(currentUser);
     }
 
     /**
-     * Retrieves the list of themes the currently authenticated user is subscribed to.
+     * Retrieves the list of topics the currently authenticated user is subscribed to.
      *
-     * @return a list of subscribed themes as response DTOs
+     * @return a list of subscribed topics as response DTOs
      */
-    public List<ThemeResponse> getSubscriptions() {
+    public List<TopicResponse> getSubscriptions() {
         User currentUser = authUtils.getCurrentUser();
         return currentUser.getSubscriptions()
                 .stream()
-                .map(themeMapper::toResponse)
+                .map(topicMapper::toResponse)
                 .collect(Collectors.toList());
     }
 }

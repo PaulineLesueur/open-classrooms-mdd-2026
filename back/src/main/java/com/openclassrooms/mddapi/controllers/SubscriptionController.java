@@ -1,6 +1,6 @@
 package com.openclassrooms.mddapi.controllers;
 
-import com.openclassrooms.mddapi.dto.responses.ThemeResponse;
+import com.openclassrooms.mddapi.dto.responses.TopicResponse;
 import com.openclassrooms.mddapi.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * REST controller exposing endpoints for managing user theme subscriptions.
+ * REST controller exposing endpoints for managing user topic subscriptions.
  * Base path: {@code /api/subscriptions}
  */
 @RestController
@@ -20,36 +20,36 @@ public class SubscriptionController {
     private final UserService userService;
 
     /**
-     * Retrieves all themes the currently authenticated user is subscribed to.
+     * Retrieves all topics the currently authenticated user is subscribed to.
      *
-     * @return HTTP 200 with a list of subscribed themes
+     * @return HTTP 200 with a list of subscribed topics
      */
     @GetMapping
-    public ResponseEntity<List<ThemeResponse>> getSubscriptions() {
+    public ResponseEntity<List<TopicResponse>> getSubscriptions() {
         return ResponseEntity.ok(userService.getSubscriptions());
     }
 
     /**
-     * Subscribes the currently authenticated user to a theme.
+     * Subscribes the currently authenticated user to a topic.
      *
-     * @param themeId the ID of the theme to subscribe to
+     * @param topicId the ID of the topic to subscribe to
      * @return HTTP 200 on success
      */
-    @PostMapping("/{themeId}")
-    public ResponseEntity<Void> subscribe(@PathVariable Integer themeId) {
-        userService.subscribe(themeId);
+    @PostMapping("/{topicId}")
+    public ResponseEntity<Void> subscribe(@PathVariable Integer topicId) {
+        userService.subscribe(topicId);
         return ResponseEntity.ok().build();
     }
 
     /**
-     * Unsubscribes the currently authenticated user from a theme.
+     * Unsubscribes the currently authenticated user from a topic.
      *
-     * @param themeId the ID of the theme to unsubscribe from
+     * @param topicId the ID of the topic to unsubscribe from
      * @return HTTP 204 on success
      */
-    @DeleteMapping("/{themeId}")
-    public ResponseEntity<Void> unsubscribe(@PathVariable Integer themeId) {
-        userService.unsubscribe(themeId);
+    @DeleteMapping("/{topicId}")
+    public ResponseEntity<Void> unsubscribe(@PathVariable Integer topicId) {
+        userService.unsubscribe(topicId);
         return ResponseEntity.noContent().build();
     }
 }

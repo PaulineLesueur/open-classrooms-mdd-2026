@@ -5,40 +5,49 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 /**
- * JPA entity representing a comment on a post.
+ * JPA entity representing a blog post.
  * <p>
- * A comment is written by a {@link User} and attached to a {@link Post}.
+ * A post belongs to a single author ({@link User}) and a single {@link Topic}.
  * The creation date is automatically set before the first database insert.
  */
 @Getter
 @Setter
 @Entity
-@Table(name = "comments")
-public class Comment {
+@Table(name = "posts")
+public class Post {
     /** Auto-incremented primary key. */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    /** Text content of the comment. */
-    @Column(nullable = false, columnDefinition = "TEXT")
-    private String body;
+    /** Title of the post (max 255 characters). */
+    @Column(nullable = false, length = 255)
+    private String title;
 
-    /** Date the comment was created, set automatically on first persist. */
+    /** Full text content of the post. */
+    @Column(nullable = false, columnDefinition = "LONGTEXT")
+    private String content;
+
+    /** Date the post was created, set automatically on first persist. */
     @Column(nullable = false, name = "created_at")
     private LocalDate createdAt;
 
-    /** User who posted the comment. */
+    /** User who wrote the post. */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id", nullable = false)
     private User author;
 
-    /** Post this comment belongs to. */
+    /** Topic the post is associated with. */
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "post_id", nullable = false)
-    private Post post;
+    @JoinColumn(name = "topic_id", nullable = false)
+    private Topic topic;
+
+    /** List of comments posted on this post. */
+    @OneToMany(mappedBy = "post")
+    private List<Comment> comments;
 
     /**
      * Sets {@code createdAt} to the current date before the entity is first persisted.

@@ -34,7 +34,7 @@ export class NavbarComponent implements OnInit {
       {
         label: 'Thèmes',
         icon: 'pi pi-tag',
-        routerLink: '/themes'
+        routerLink: '/topics'
       }
     ];
   }
