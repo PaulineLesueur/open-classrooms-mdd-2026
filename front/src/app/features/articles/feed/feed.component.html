@@ -2,7 +2,13 @@
 <main>
     <div class="flex justify-content-between buttons-container">
         <p-button label="Créer un article" styleClass="p-button-primary" routerLink="/article/create"></p-button>
-        <p-button label="Trier par" styleClass="p-button-secondary" icon="pi pi-arrow-down" iconPos="right"></p-button>
+        <p-button
+            label="Trier par"
+            styleClass="p-button-secondary"
+            [icon]="selectedSort === 'desc' ? 'pi pi-arrow-down' : 'pi pi-arrow-up'"
+            iconPos="right"
+            (onClick)="onSortChange()">
+        </p-button>
     </div>
 
     <div *ngIf="isLoading" class="mt-5">

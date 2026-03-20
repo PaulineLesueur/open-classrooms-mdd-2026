@@ -14,6 +14,7 @@ export class FeedComponent implements OnInit, OnDestroy {
 
   articles: ArticleResponse[] = [];
   isLoading = false;
+  selectedSort = 'desc';
   private destroy$ = new Subject<void>();
 
   constructor(
@@ -41,6 +42,14 @@ export class FeedComponent implements OnInit, OnDestroy {
           this.isLoading = false;
         }
       });
+  }
+
+  onSortChange(): void {
+    this.selectedSort = this.selectedSort === 'desc' ? 'asc' : 'desc';
+    this.articles = [...this.articles].sort((a, b) => {
+      const diff = new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+      return this.selectedSort === 'asc' ? -diff : diff;
+    });
   }
 
   ngOnDestroy(): void {
