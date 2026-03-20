@@ -33,7 +33,6 @@ import java.util.List;
  *   <li>Public routes: {@code /api/auth/**} and Swagger UI.</li>
  *   <li>All other routes require a valid JWT token.</li>
  * </ul>
- * </p>
  */
 @Configuration
 @EnableWebSecurity

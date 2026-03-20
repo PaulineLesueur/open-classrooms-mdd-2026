@@ -20,7 +20,6 @@ import java.util.Collections;
  *   <li>{@link #loadUserById(String)} — used by {@link JwtAuthenticationFilter} on every authenticated request,
  *       looks up by UUID to remain valid after an email change.</li>
  * </ul>
- * </p>
  */
 @Service
 @RequiredArgsConstructor
