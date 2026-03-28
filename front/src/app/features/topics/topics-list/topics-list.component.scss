@@ -1,7 +1,11 @@
 :host ::ng-deep  {
     p-card {
-        display: block;
+        display: flex;
         width: 31%;
+
+        .p-card {
+            flex: 1;
+        }
     }
 
     .p-button {

@@ -9,6 +9,7 @@ import com.openclassrooms.mddapi.mappers.PostMapper;
 import com.openclassrooms.mddapi.repositories.PostRepository;
 import com.openclassrooms.mddapi.repositories.TopicRepository;
 import com.openclassrooms.mddapi.repositories.UserRepository;
+import com.openclassrooms.mddapi.security.AuthUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -25,14 +26,16 @@ public class PostService {
     private final UserRepository userRepository;
     private final TopicRepository topicRepository;
     private final PostMapper postMapper;
+    private final AuthUtils authUtils;
 
     /**
-     * Retrieves all posts.
+     * Retrieves posts from the topics the current user is subscribed to.
      *
-     * @return a list of all posts as response DTOs
+     * @return a list of posts filtered by the user's subscriptions
      */
     public List<PostResponse> getAll() {
-        return postRepository.findAll()
+        User currentUser = authUtils.getCurrentUser();
+        return postRepository.findByTopicIn(currentUser.getSubscriptions())
                 .stream()
                 .map(postMapper::toResponse)
                 .collect(Collectors.toList());
