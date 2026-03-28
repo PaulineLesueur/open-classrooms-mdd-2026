@@ -1,0 +1,20 @@
+<app-navbar [hideNav]="true"></app-navbar>
+<main>
+    <a class="back-arrow" routerLink="/"><i class="pi pi-arrow-left"></i></a>
+    <section>
+        <img class="mobile-logo" src="assets/logo_p6.png" alt="Logo" />
+        <h2 class="mb-5">Se connecter</h2>
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="flex flex-column mt-4">
+                <label for="username">E-mail ou nom d'utilisateur</label>
+                <input pInputText id="identifier" formControlName="identifier" />
+            </div>
+            <div class="flex flex-column mt-4">
+                <label for="password">Mot de passe</label>
+                <p-password id="password" formControlName="password" [toggleMask]="true" [feedback]="false" styleClass="w-full" [inputStyle]="{'width': '100%'}"></p-password>
+            </div>
+            <p-button label="Se connecter" styleClass="p-button-primary mt-4" type="submit"></p-button>
+        </form>
+    </section>
+</main>

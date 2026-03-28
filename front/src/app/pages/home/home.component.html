@@ -1,5 +1,7 @@
-<div class="center">
-  <img src="/assets/logo_p6.png" alt="logo" />
-  <h1>Welcome to MDD</h1>
-  <button mat-raised-button color="primary" (click)="start()">Commencer</button>
-</div>
+<main>
+  <img src="assets/logo_p6.png" alt="Logo MDD" class="logo" />
+  <div class="flex column-gap-8 justify-content-center">
+    <p-button label="Se connecter" styleClass="p-button-secondary" routerLink="/auth/login"></p-button>
+    <p-button  label="S'inscrire" styleClass="p-button-secondary" routerLink="/auth/register"></p-button>
+  </div>
+</main>

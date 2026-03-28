@@ -3,6 +3,9 @@
 # Compiled output
 /dist
 /tmp
+
+# Compodoc generated output
+/documentation
 /out-tsc
 /bazel-out
 

@@ -1,0 +1,16 @@
+<app-navbar></app-navbar>
+<main>
+    <div class="mt-5 flex column-gap-6 row-gap-5 flex-wrap">
+        <p-card *ngFor="let topic of topics" [header]="topic.name">
+            <p>{{ topic.description }}</p>
+            <div class="mt-3 flex justify-content-center container-button">
+                <p-button
+                    [label]="isSubscribed(topic.id) ? 'Déjà abonné' : 'S\'abonner'"
+                    styleClass="p-button-primary"
+                    [disabled]="isSubscribed(topic.id)"
+                    (onClick)="subscribe(topic.id)">
+                </p-button>
+            </div>
+        </p-card>
+    </div>
+</main>
