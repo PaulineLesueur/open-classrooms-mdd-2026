@@ -22,7 +22,4 @@ public class PostRequest {
 
     @NotNull(message = "Topic is mandatory")
     private Integer topicId;
-
-    @NotBlank(message = "Author is mandatory")
-    private String authorId;
 }

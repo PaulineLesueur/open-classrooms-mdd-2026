@@ -8,7 +8,6 @@ import com.openclassrooms.mddapi.entities.User;
 import com.openclassrooms.mddapi.mappers.PostMapper;
 import com.openclassrooms.mddapi.repositories.PostRepository;
 import com.openclassrooms.mddapi.repositories.TopicRepository;
-import com.openclassrooms.mddapi.repositories.UserRepository;
 import com.openclassrooms.mddapi.security.AuthUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,7 +22,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class PostService {
     private final PostRepository postRepository;
-    private final UserRepository userRepository;
     private final TopicRepository topicRepository;
     private final PostMapper postMapper;
     private final AuthUtils authUtils;
@@ -62,8 +60,7 @@ public class PostService {
      * @throws RuntimeException if the author or topic is not found
      */
     public PostResponse create(PostRequest request) {
-        User author = userRepository.findById(request.getAuthorId())
-                .orElseThrow(() -> new RuntimeException("User not found with id : " + request.getAuthorId()));
+        User author = authUtils.getCurrentUser();
         Topic topic = topicRepository.findById(request.getTopicId())
                 .orElseThrow(() -> new RuntimeException("Topic not found with id : " + request.getTopicId()));
         Post post = postMapper.toEntity(request, author, topic);

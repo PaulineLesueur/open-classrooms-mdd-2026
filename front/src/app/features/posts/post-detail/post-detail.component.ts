@@ -62,8 +62,7 @@ export class PostDetailComponent implements OnInit, OnDestroy {
 
   submitComment(): void {
     if (!this.commentBody.trim()) return;
-    const authorId = this.authService.getUserId() || '';
-    this.commentService.create({ body: this.commentBody, authorId, postId: this.postId })
+    this.commentService.create({ body: this.commentBody, postId: this.postId })
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (comment) => {

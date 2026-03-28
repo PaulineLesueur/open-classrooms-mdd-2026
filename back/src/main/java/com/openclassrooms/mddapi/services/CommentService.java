@@ -8,7 +8,7 @@ import com.openclassrooms.mddapi.entities.User;
 import com.openclassrooms.mddapi.mappers.CommentMapper;
 import com.openclassrooms.mddapi.repositories.PostRepository;
 import com.openclassrooms.mddapi.repositories.CommentRepository;
-import com.openclassrooms.mddapi.repositories.UserRepository;
+import com.openclassrooms.mddapi.security.AuthUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,9 +23,9 @@ import java.util.stream.Collectors;
 public class CommentService {
 
     private final CommentRepository commentRepository;
-    private final UserRepository userRepository;
     private final PostRepository postRepository;
     private final CommentMapper commentMapper;
+    private final AuthUtils authUtils;
 
     /**
      * Retrieves all comments for a given post.
@@ -48,8 +48,7 @@ public class CommentService {
      * @throws RuntimeException if the author or post is not found
      */
     public CommentResponse create(CommentRequest request) {
-        User author = userRepository.findById(request.getAuthorId())
-                .orElseThrow(() -> new RuntimeException("User not found with id : " + request.getAuthorId()));
+        User author = authUtils.getCurrentUser();
         Post post = postRepository.findById(request.getPostId())
                 .orElseThrow(() -> new RuntimeException("Post not found with id : " + request.getPostId()));
         Comment comment = commentMapper.toEntity(request, author, post);

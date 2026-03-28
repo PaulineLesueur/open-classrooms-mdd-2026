@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.UUID;
 
 /**
  * REST controller exposing endpoints for user profile management.
@@ -33,28 +32,24 @@ public class UserController {
     }
 
     /**
-     * Updates a user's profile (username and email).
+     * Updates the authenticated user's profile (username and email).
      *
-     * @param id      the UUID of the user to update
      * @param request the request body containing the new username and email
      * @return HTTP 200 with the updated user profile
      */
-    @PutMapping("/{id}")
-    public ResponseEntity<UserResponse> update(@PathVariable String id, @RequestBody @Valid UserRequest request) {
-        return ResponseEntity.ok(userService.update(id, request));
+    @PutMapping("/me")
+    public ResponseEntity<UserResponse> update(@RequestBody @Valid UserRequest request) {
+        return ResponseEntity.ok(userService.update(request));
     }
 
     /**
-     * Updates a user's password.
+     * Updates the authenticated user's password.
      *
-     * @param id      the UUID of the user
      * @param request the request body containing the new password
      * @return HTTP 200 with the updated user profile
      */
-    @PutMapping("/{id}/password")
-    public ResponseEntity<UserResponse> updatePassword(
-            @PathVariable String id,
-            @Valid @RequestBody UserPasswordRequest request) {
-        return ResponseEntity.ok(userService.updatePassword(id, request));
+    @PutMapping("/me/password")
+    public ResponseEntity<UserResponse> updatePassword(@Valid @RequestBody UserPasswordRequest request) {
+        return ResponseEntity.ok(userService.updatePassword(request));
     }
 }

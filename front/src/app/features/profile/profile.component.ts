@@ -83,7 +83,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     onSubmit(): void {
         const { username, email, password } = this.form.value;
 
-        const profileUpdate = this.userService.update(this.userId, { username, email });
+        const profileUpdate = this.userService.update({ username, email });
         profileUpdate.subscribe({
             next: () => {
                 this.authService.saveUser({
@@ -94,7 +94,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
                 });
 
                 if (password) {
-                    this.userService.updatePassword(this.userId, { password }).subscribe({
+                    this.userService.updatePassword({ password }).subscribe({
                         next: () => {
                             this.messageService.add({
                                 severity: 'success',

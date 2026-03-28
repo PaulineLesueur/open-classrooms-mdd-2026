@@ -9,6 +9,5 @@ export interface CommentResponse {
 /** Payload sent to the API to create a new comment. */
 export interface CommentRequest {
     body: string;
-    authorId: string;
     postId: number;
 }

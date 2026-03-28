@@ -64,9 +64,8 @@ public class UserService {
      * @return the updated user as a response DTO
      * @throws RuntimeException if the user is not found, or if the new username/email is already in use
      */
-    public UserResponse update(String id, UserRequest request) {
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("No user found with the id : " + id));
+    public UserResponse update(UserRequest request) {
+        User user = authUtils.getCurrentUser();
         if (!user.getUsername().equals(request.getUsername())
                 && userRepository.existsByUsername(request.getUsername())) {
             throw new RuntimeException("Username already in use");
@@ -88,9 +87,8 @@ public class UserService {
      * @return the updated user as a response DTO
      * @throws RuntimeException if no user is found with the given ID
      */
-    public UserResponse updatePassword(String id, UserPasswordRequest request) {
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("No user found with the id : " + id));
+    public UserResponse updatePassword(UserPasswordRequest request) {
+        User user = authUtils.getCurrentUser();
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         return userMapper.toResponse(userRepository.save(user));
     }

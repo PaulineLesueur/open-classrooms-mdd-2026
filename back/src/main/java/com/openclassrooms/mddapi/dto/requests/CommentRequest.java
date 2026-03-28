@@ -15,9 +15,6 @@ public class CommentRequest {
     @NotBlank(message = "Content is mandatory")
     private String body;
 
-    @NotBlank(message = "Author is mandatory")
-    private String authorId;
-
     @NotNull(message = "Post is mandatory")
     private Long postId;
 }

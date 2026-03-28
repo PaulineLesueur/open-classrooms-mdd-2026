@@ -54,8 +54,7 @@ export class CreateFormComponent implements OnInit, OnDestroy {
   onSubmit(): void {
     if (this.form.invalid) return;
     this.isSubmitting = true;
-    const authorId = this.authService.getUserId() || '';
-    this.postService.create({ ...this.form.value, authorId })
+    this.postService.create(this.form.value)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (post) => {

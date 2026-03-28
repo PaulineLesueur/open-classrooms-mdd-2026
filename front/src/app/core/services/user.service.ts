@@ -17,11 +17,11 @@ export class UserService {
         return this.http.get<UserResponse>(`${this.apiUrl}/${id}`);
     }
 
-    update(id: string, request: UserRequest): Observable<UserResponse> {
-        return this.http.put<UserResponse>(`${this.apiUrl}/${id}`, request);
+    update(request: UserRequest): Observable<UserResponse> {
+        return this.http.put<UserResponse>(`${this.apiUrl}/me`, request);
     }
 
-    updatePassword(id: string, request: UserPasswordRequest): Observable<UserResponse> {
-        return this.http.put<UserResponse>(`${this.apiUrl}/${id}/password`, request);
+    updatePassword(request: UserPasswordRequest): Observable<UserResponse> {
+        return this.http.put<UserResponse>(`${this.apiUrl}/me/password`, request);
     }
 }
